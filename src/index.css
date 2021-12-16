@@ -1,0 +1,14 @@
+:root {
+  --primary-color: rgb(0, 109, 109);
+  --text-color: #333;
+  --sidebar-height: 240px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fuzzy Bubbles', cursive ;
+  /* font-size: 75%; */
+}

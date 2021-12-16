@@ -1,0 +1,46 @@
+.wrapper {
+
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.contentHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0 ;
+}
+
+.heading {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.option {
+    display: flex;
+}
+
+.optionBtn {
+    text-decoration:  none;
+    border-radius: 3px;
+    margin-left: 20px;
+    border: 1px solid var(--primary-color);
+    padding: 6px;
+    color: var(--text-color);
+    transition: all ease 0.2s;
+}
+
+.optionIcon {
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+.optionBtn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
