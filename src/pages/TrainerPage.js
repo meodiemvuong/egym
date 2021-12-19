@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Footer, TrainerDetail } from '../components'
+import { Header, Footer, TrainerDetail, TrainerInfor } from '../components'
 
 
 function TrainerPage() {
@@ -12,7 +12,7 @@ function TrainerPage() {
                 <div className="grid">
                     <div className="row">
                         <div className="col l-10 l-o-1">
-                            <TrainerDetail />
+                            <TrainerDetail/>
                         </div>
                     </div>
                 </div>

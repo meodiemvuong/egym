@@ -10,14 +10,21 @@ import { Schedule, AdminHeader, CustomerInfor } from './../';
 
 function CustomerDetail({ admin }) {
     const id = useParams();
-
+    var ID ;
+    if(id.id=null){
+        ID = id.id;
+    }
+    else {
+        ID = localStorage.getItem('ID');
+    }
     return (
         <div className={clsx(styles.customerWrapper)}>
             {admin && <AdminHeader heading="Thông tin học viên" />}
             <div className={clsx(styles.content)}>
                 <section className={clsx(styles.contentField)}>
                     <h2 className={clsx(styles.heading)}>Thông tin cá nhân</h2>
-                    <CustomerInfor />
+                    {CustomerInfor(ID)}
+                    
                 </section>
 
                 <section className={clsx(styles.contentField)}>

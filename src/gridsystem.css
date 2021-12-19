@@ -1,4 +1,4 @@
-/* Đương đây, k được sửa gì trong file này nha */
+
 
 .grid {
     width: 100%;
@@ -11,7 +11,7 @@
     margin: 0 auto;
 }
 
-/* Đương đây, k được sửa gì trong file này nha */
+
 
 .row {
     display: flex;
@@ -20,7 +20,7 @@
     margin-right: -4px;
 }
 
-/* Đương đây, k được sửa gì trong file này nha */
+
 
 .row.no-gutters {
     margin-left: 0;

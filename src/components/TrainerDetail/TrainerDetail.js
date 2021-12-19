@@ -8,14 +8,21 @@ import TrainerInfor from '../TrainerInfor/TrainerInfor'
 
 function TrainerDetail({ admin }) {
     const id = useParams();
-
+    var ID ;
+    if(id.id=null){
+        ID = id.id;
+    }
+    else {
+        ID = localStorage.getItem('ID');
+    }
     return (
         <div className={clsx(styles.wrapper)}>
             {admin && <AdminHeader heading="Thông tin huấn luyện viên" />}
             <div className={clsx(styles.content)}>
                 <section className={clsx(styles.contentField)}>
                     <h2 className={clsx(styles.heading)}>Thông tin cá nhân</h2>
-                    <TrainerInfor />
+                    {TrainerInfor(ID)}
+                    
                 </section>
 
                 <section className={clsx(styles.contentField)}>
@@ -28,12 +35,8 @@ function TrainerDetail({ admin }) {
                     {/* <div className="grid">
                         <div className="row">
                             <div className="col l-10 l-o-1"> */}
-                    <CustomerItem />
-                    <CustomerItem />
-                    <CustomerItem />
-                    <CustomerItem />
-                    <CustomerItem />
-                    <CustomerItem />
+                    {/* <CustomerItem /> */}
+                    
                     {/* </div>
                         </div>
                     </div> */}

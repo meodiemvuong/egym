@@ -7,10 +7,12 @@ import avatar from './../../store/imgs/avatar.jpg'
 import styles from './TrainerInfor.module.css'
 
 
+
 // Trang này có thể hiển thị với cả học viên, huấn luyện viên và admin
 // Thông tin chi tiết của mỗi học viên
 
-function TrainerInfor() {
+function TrainerInfor(id) {
+    
     let [nameUpdating, setNameUpdating] = useState(false);
     let [phone_numberUpdating, setphone_numberUpdating] = useState(false);
     let [date_of_birthUpdating, setdate_of_birthUpdating] = useState(false);
@@ -24,6 +26,7 @@ function TrainerInfor() {
     let date_of_birthRef = useRef(null);
     let sexRef = useRef(null);
     let descriptionRef = useRef(null);
+    //let[id , setID] = useState(null)
     //let registerRef = useRef(null);
 
     let [userProfile, setUserProfile] = useState({
@@ -39,20 +42,20 @@ function TrainerInfor() {
     // Để show Popup sau khi cập nhật thành công
     useEffect(() => {
         if (showPopup) {
-            var id = setTimeout(() => {
+            var id1 = setTimeout(() => {
                 setShowPopup(prev => !prev);
             }, 1000)
         }
         return () => {
-            clearTimeout(id);
+            clearTimeout(id1);
         }
     }, [showPopup])
 
     // Lấy profile về
     useEffect(() => {
         (async () => {
-            let response = await userProfileAPI.getProfile();
-            
+            let response = await userProfileAPI.getProfile(id);
+            console.log(id)
             //console.log(response.data.data)
             //let data = JSON.parse(response.data);
             //console.log(typeof(data))
@@ -64,6 +67,7 @@ function TrainerInfor() {
             }
         })()
     }, [])
+    console.log(userProfile)
 
     // Upload Avatar
 

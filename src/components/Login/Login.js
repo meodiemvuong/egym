@@ -11,6 +11,7 @@ function Login() {
     const navigate = useNavigate();
     let [userState, setUserState] = useState({ role: 'admin' });
     let [loginFalse, setLoginFalse] = useState(false);
+    let [error, setThongbao] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -23,25 +24,35 @@ function Login() {
             user = {...user,role:userState.role};
             const response = await authAPI.login(JSON.stringify(user));
             
-            //const response = await authAPI.login(user)
-            
+            //const response = await authAPI.login(user)                   
             console.log(response)
             if(response.data.error == 'null') {
                 navigate('/');
+                localStorage.setItem('ID', JSON.stringify(response.data.data[0].id))
                 localStorage.setItem('role',user.role);
                 
             }
             if(response.error=='null'){
-                localStorage.setItem('account', JSON.stringify(response.data))
+                
                 navigate('/admin');
             }
-            
-            else {
+            if(response.data.error != 'null'|| response.error!='null') {
                 setLoginFalse(true);
-                var thongbao = response.data.error;
-                
+
+                var thongbao;
+                if(response.data.error!='null'){
+                    thongbao = response.data.error;
+                    setThongbao(thongbao)
+                } 
+                if(response.error!=null)    {
+                    thongbao= response.error;
+                    setThongbao(thongbao)
+                }
                 
             }
+            console.log(error);
+            
+            
         }
     }
 
@@ -116,7 +127,7 @@ function Login() {
                                     }}
                                 />
                             </div>
-                            {loginFalse && <h2 className="login-false">Tài khoản hoặc mật khẩu không chính xác</h2>}
+                            {loginFalse && <h2 className="login-false">{error}</h2>}
                             <button className={userState.username && userState.password ? "usersubmit-btn" : "usersubmit-btn inactive"}>Đăng nhập</button>
                         </form>
                     </div>

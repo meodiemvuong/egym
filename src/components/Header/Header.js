@@ -6,11 +6,11 @@ import { useSelector } from 'react-redux'
 import authAPI from "./../../api/authAPI";
 
 
+
 function Header() {
     var user = null;
     const navigate = useNavigate();
-    user = JSON.parse(localStorage.getItem('account'));
-    
+    user = localStorage.getItem('ID');
     let [showOption, setShowOpTion] = useState(false);
 
     const handleShowOption = () => {

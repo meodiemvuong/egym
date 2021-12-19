@@ -16,7 +16,7 @@ const authAPI = {
                     return respone;
                 }
                 else {
-                    let respone = {"data":"null","error":"Tài khoản hoặc mật khẩu không chính xác"}
+                    let respone = {"data":"null","error":"Sai tài khoản hoặc sai tên mật khẩu"}
                     return respone 
                 }
             } 
@@ -31,10 +31,9 @@ const authAPI = {
             let response = await axiosClient.post(url,params);
             console.log(response.data);
             
-            localStorage.setItem('account', JSON.stringify(response.data.data[0]));
-            console.log(localStorage.getItem('account'));
-            store.dispatch(Actions.saveUserToRedux(localStorage.getItem('token')));
-            
+            //localStorage.setItem('account', JSON.stringify(response.data.data[0]));
+            //console.log(localStorage.getItem('account'));
+            store.dispatch(Actions.saveUserToRedux(localStorage.getItem('token')));                                 
             //console.log("dang nhap oke");
             return response;
         } catch (err) {
@@ -48,6 +47,7 @@ const authAPI = {
             const url = '/auth/logout'
             //const response = await axiosClient.post(url);
             localStorage.removeItem('account');
+            localStorage.removeItem('datatrainer');
             store.dispatch(Actions.removeUserOutOfRedux(null))
         } catch (err) {
             alert(err.message);

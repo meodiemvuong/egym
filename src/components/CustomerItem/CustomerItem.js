@@ -1,4 +1,4 @@
-import React, { useParams } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 
@@ -9,10 +9,35 @@ import styles from './CustomerItem.module.css'
 //Từng học viên trong danh sách các học viên
 
 function CustomerItem() {
-    const id = 1
+    const [items, setItems] = useState([])
+    let url=`http://localhost:8080/cnpm/student`;
+    // function getTrainer(callback){
+    //     fetch(url).then(response=>{return response.json()}).then(callback)
+    // }
+    // function start(){
+    //     getTrainer(res=>{
+    //         console.log(res.data);
+    //         var items = res.data;
+    //         renderCourse(items);
+    //     })
+        
+        
+    // }
+    // start()
+    useEffect(() => {
+
+    fetch(url)
+        .then (response =>response.json())
+        .then (data => setItems(data.data))
+    },[]);
+
+    console.log(items)
     return (
-        <div to='/' className={clsx(styles.wrapper)}>
-            <Link to={`detail/${id}`} className={clsx(styles.content)}>
+        <div className="">                              
+                {items.map((item, index) =>
+                    <div key ={index} classname="">
+                            <div to='/' className={clsx(styles.wrapper)}>
+            <Link to={`detail/${item.id}`} className={clsx(styles.content)}>
                 <div className={clsx(styles.avatarField)}>
                     <div
                         style={{
@@ -23,7 +48,7 @@ function CustomerItem() {
                         className={clsx(styles.avatarImg)}
                     >
                     </div>
-                    <div className={clsx(styles.name)}>Nguyễn Văn Đương</div>
+                    <div className={clsx(styles.name)}>{item.name}</div>
                 </div>
 
                 <div className={clsx(styles.inforField)}>
@@ -33,7 +58,7 @@ function CustomerItem() {
 
                 <div className={clsx(styles.inforField)}>
                     <i class={clsx(styles.inforIcon, styles.gender, "fas fa-male")}></i>
-                    <div className={clsx(styles.inforContent)}>Nam</div>
+                    <div className={clsx(styles.inforContent)}>{item.sex}</div>
                 </div>
 
                 <div className={clsx(styles.inforField)}>
@@ -43,7 +68,7 @@ function CustomerItem() {
                             color: 'rgb(241, 122, 142)'
                         }}
                     ></i>
-                    <div className={clsx(styles.inforContent)}>21-12-2001</div>
+                    <div className={clsx(styles.inforContent)}>{item.date_of_birth}</div>
                 </div>
 
                 <div className={clsx(styles.inforField)}>
@@ -53,7 +78,7 @@ function CustomerItem() {
                             color: 'rgb(184, 184, 58)'
                         }}
                     ></i>
-                    <div className={clsx(styles.inforContent)}>0982912987</div>
+                    <div className={clsx(styles.inforContent)}>{item.phone_number}</div>
                 </div>
 
                 <div className={clsx(styles.inforField)}>
@@ -63,28 +88,30 @@ function CustomerItem() {
                             color: 'rgb(48, 48, 240)'
                         }}
                     ></i>
-                    <div className={clsx(styles.inforContent)}>Nguyễn Văn Tùng</div>
+                    <div className={clsx(styles.inforContent)}>{item.name}</div>
                 </div>
 
             </Link>
 
-            <div className={clsx(styles.updateField)}>
-                <div className={clsx(styles.inforField, styles.editField)}>
-                    <i class={clsx(styles.editIcon, "fas fa-edit")}></i>
-                    <div className={clsx(styles.updateContent, styles.edit)}>
-                        Sửa
-                    </div>
-                </div>
-
-                <div className={clsx(styles.inforField, styles.deleteField)}>
-                    <i class={clsx(styles.deleteIcon, "fas fa-user-minus")}></i>
-                    <div className={clsx(styles.updateContent, styles.delete)}>
-                        Xóa
-                    </div>
-                </div>
-            </div>
+            
+        </div>
+                            {/* {item.name} */}
+                            {/* <Link to={`detail/${item.id}`} className="trainer-link">
+                                <div className="col">
+                                <div className="trainer-wrapper ">
+                                    <div className="trainer-infor">
+                                        <div className="trainer-name col">{item.name}</div>
+                                        <div className="trainer-age col">{item.id}</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </Link> */}
+                        </div>
+                
+        )}
         </div>
     )
+    
 }
 
 export default CustomerItem

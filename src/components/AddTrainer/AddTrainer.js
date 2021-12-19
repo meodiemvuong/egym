@@ -3,6 +3,7 @@ import clsx from 'clsx'
 
 import styles from './AddTrainer.module.css'
 import { AdminHeader, Popup } from './../'
+import addProfile from '../../api/addProfile';
 
 // Trang thêm huấn luyện viên
 
@@ -13,7 +14,12 @@ function AddTrainer() {
     let [trainerPhone, setTrainerPhone] = useState("");
     let [trainerHeight, setTrainerHeight] = useState("");
     let [trainerWeight, setTrainerWeight] = useState("");
-
+    let [userState, setUserState] = useState({});
+    
+    let params = {
+        "username": useState.username,
+        "password": useState.password,
+    }
     let [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
@@ -28,6 +34,15 @@ function AddTrainer() {
         }
     }, [showPopup])
 
+    useEffect(() => {
+        (async () => {
+            const responseID = await addProfile.addTrainer(params);
+
+            console.log(responseID)
+            //const responseAID = await addProfile.p
+        })()
+    }, [])
+
     return (
         <div className={clsx(styles.wrapper)}>
             <AdminHeader heading="Thêm huấn luyện viên" />
@@ -39,12 +54,24 @@ function AddTrainer() {
                             <div className={clsx(styles.contentField)}>
                                 {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
                                 <i class="fas fa-user-circle"></i>
-                                <input
+                                {/* <input
                                     type="text"
                                     className={clsx(styles.contentText)}
                                     placeholder="Tài khoản"
+                                /> */}
+                                <input
+                                    className="userinput"
+                                    type="text"
+                                    name="username"
+                                    id="username"
+                                    placeholder="Tài khoản"
+                                    onChange={(e) => {
+                                        const username = e.target.value;
+                                        setUserState({ ...userState, username });
+                                    }}
                                 />
                             </div>
+                            
 
                             <div className={clsx(styles.contentField)}>
                                 {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
@@ -78,12 +105,12 @@ function AddTrainer() {
 
                             <div className={clsx(styles.contentField)}>
                                 {/* <h2 className={clsx(styles.contentLabel)}>Tuổi</h2> */}
-                                <i class="fas fa-birthday-cake"></i>
+                                {/* <i class="fas fa-birthday-cake"></i>
                                 <input
                                     type="text"
                                     className={clsx(styles.contentText)}
                                     placeholder="Nhập tuổi"
-                                />
+                                /> */}
                             </div>
 
                         </div>
@@ -116,29 +143,29 @@ function AddTrainer() {
                                 />
                             </div>
 
-                            <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Chiều cao</h2> */}
+                            {/* <div className={clsx(styles.contentField)}>
+                                
                                 <i class="fas fa-text-height"></i>
                                 <input
                                     type="text"
                                     className={clsx(styles.contentText)}
                                     placeholder="Nhập chiều cao"
                                 />
-                            </div>
+                            </div> */}
 
-                            <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Cân nặng</h2> */}
+                            {/* <div className={clsx(styles.contentField)}>
+                                
                                 <i class="fas fa-weight"></i>
                                 <input
                                     type="text"
                                     className={clsx(styles.contentText)}
                                     placeholder="Nhập cân nặng"
                                 />
-                            </div>
+                            </div> */}
 
 
                             <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Cân nặng</h2> */}
+                                
                                 <i class="fas fa-save"></i>
                                 <button
                                     onClick={() => {

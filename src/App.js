@@ -6,9 +6,11 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import * as Actions from './store/actions'
 
+
 function App() {
 
     const dispatch = useDispatch();
+    
 
     useEffect(() => {
         let token = localStorage.getItem('token');

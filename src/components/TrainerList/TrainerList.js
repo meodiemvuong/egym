@@ -24,9 +24,9 @@ function TrainerList() {
                     </div>
                 </div>
                 <div className="grid">
-                    <div className="row">
-                        <TrainerItem />
-
+                    <div className="container">
+                        <div classname=''><TrainerItem/></div>
+                                                              
                     </div>
                 </div>
             </div>

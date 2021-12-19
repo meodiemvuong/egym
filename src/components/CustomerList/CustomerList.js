@@ -26,14 +26,7 @@ function CustomerList() {
                     </div>
                 </div>
                 <CustomerItem />
-                <CustomerItem />
-                <CustomerItem />
-                <CustomerItem />
-                <CustomerItem />
-                <CustomerItem />
-                <CustomerItem />
-                <CustomerItem />
-                <CustomerItem />
+                
                 {/* <CustomerInfor /> */}
             </div>
         </div>

@@ -1,11 +1,13 @@
 import axiosClient from "./axiosClient"
 
+
 const userProfileAPI = {
-    getProfile: async () => {
+    
+    getProfile: async (id) => {
         try {
-            let url = `/trainer?id=${JSON.parse(localStorage.getItem('account')).id}`;
+            let url = `/trainer?id=${id}`;
             if(localStorage.getItem('role') != 'trainer'){
-                url = `/student?id=${JSON.parse(localStorage.getItem('account')).id}`;
+                url = `/student?id=${id}`;
             }
             
             
@@ -13,24 +15,24 @@ const userProfileAPI = {
             //console.log(typeof(response))
 
             
-            console.log(response.data.data[0]);
+            //console.log(response.data.data[0]);
             return response;
         } catch (error) {
             alert(error.message)
         }
     },
+    
 
-    getProfileTrainer: async () => {
-        try{
-        let url = `/trainer`;
-        let response = await axiosClient.get(url);
-        //console.log(response.data.data)
-        return response.data
+    // getProfileTrainer: async () => {
+    //     try{
+    //     let url = '/trainer';
+    //     let response = await axiosClient.get(url);
+    //     //console.log(response.data.data)
+    //     return response
         
-    } catch(e) {
-        alert(e.message)
-    }
+    // } catch(e) {
+    //     alert(e.message)
+    // }
 
-}}
-
-export default userProfileAPI;
+}
+export default userProfileAPI

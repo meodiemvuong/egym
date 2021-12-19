@@ -9,7 +9,7 @@ import styles from './CustomerInfor.module.css'
 // Trang này có thể hiển thị với cả học viên, huấn luyện viên và admin
 // Thông tin chi tiết của mỗi học viên
 
-function CustomerInfor() {
+function CustomerInfor(id) {
     let [nameUpdating, setNameUpdating] = useState(false);
     let [phone_numberUpdating, setphone_numberUpdating] = useState(false);
     let [date_of_birthUpdating, setdate_of_birthUpdating] = useState(false);
@@ -42,19 +42,19 @@ function CustomerInfor() {
     // Để show Popup sau khi cập nhật thành công
     useEffect(() => {
         if (showPopup) {
-            var id = setTimeout(() => {
+            var id1 = setTimeout(() => {
                 setShowPopup(prev => !prev);
             }, 1000)
         }
         return () => {
-            clearTimeout(id);
+            clearTimeout(id1);
         }
     }, [showPopup])
 
     // Lấy profile về
     useEffect(() => {
         (async () => {
-            const response = await userProfileAPI.getProfile();
+            const response = await userProfileAPI.getProfile(id);
             if (response && response.data && response.data.data[0]) {
                 userProfile = { ...response.data.data[0] };
                 setUserProfile(userProfile);
