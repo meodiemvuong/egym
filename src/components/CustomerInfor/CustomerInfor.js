@@ -10,6 +10,8 @@ import styles from './CustomerInfor.module.css'
 // Thông tin chi tiết của mỗi học viên
 
 function CustomerInfor(id) {
+    console.log(id);
+    //id = localStorage.getItem('ID');
     let [nameUpdating, setNameUpdating] = useState(false);
     let [phone_numberUpdating, setphone_numberUpdating] = useState(false);
     let [date_of_birthUpdating, setdate_of_birthUpdating] = useState(false);
@@ -58,10 +60,11 @@ function CustomerInfor(id) {
             if (response && response.data && response.data.data[0]) {
                 userProfile = { ...response.data.data[0] };
                 setUserProfile(userProfile);
+                //localStorage.removeItem('ID');
             }
         })()
     }, [])
-
+    console.log(userProfile)
     // Upload Avatar
 
     const handleUploadAvatar = async (e) => {
@@ -113,13 +116,12 @@ function CustomerInfor(id) {
 
     //Update Profile
     const handleUpdate = async () => {
-        console.log(userProfile);
         setShowPopup(prev => !prev)
-        // const response = await userProfileAPI.updateProfile(userProfile);
-        // if(response && response.status) setShowPopup(prev => !prev);
-        // if(response && !response.status && response.message) {
-        //     alert(response.message)
-        // }
+        const response = await userProfileAPI.updateProfile(userProfile)
+        if(response && response.status) setShowPopup(prev => !prev);
+        if(response && response.data.error) {
+            alert(response.data.error)
+        }
     }
 
 

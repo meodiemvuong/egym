@@ -28,7 +28,7 @@ function Login() {
             console.log(response)
             if(response.data.error == 'null') {
                 navigate('/');
-                localStorage.setItem('ID', JSON.stringify(response.data.data[0].id))
+                
                 localStorage.setItem('role',user.role);
                 
             }

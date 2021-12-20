@@ -9,7 +9,7 @@ function Timetablee() {
                     {
                         endTime: new Date('2018-02-23T10:00:00'),
                         id: 1,
-                        name: 'Nguyễn Văn Đương',
+                        name: 'Jeralee Gouldie',
                         startTime: new Date('2018-02-23T08:00:00'),
                         type: 'error'
                     }
@@ -18,14 +18,14 @@ function Timetablee() {
                     {
                         endTime: new Date('2018-02-22T17:00:00'),
                         id: 2,
-                        name: 'Nguyễn Quang Dũng',
+                        name: 'Jeralee Gouldie',
                         startTime: new Date('2018-02-22T15:00:00'),
                         type: 'error'
                     },
                     {
                         endTime: new Date('2018-02-22T13:00:00'),
                         id: 3,
-                        name: 'Nguyễn Văn Đương',
+                        name: 'Jeralee Gouldie',
                         startTime: new Date('2018-02-22T11:00:00'),
                         type: 'custom'
                     }
@@ -36,7 +36,7 @@ function Timetablee() {
                     {
                         endTime: new Date('2018-02-22T16:00:00'),
                         id: 4,
-                        name: 'Nguyễn Quang Dũng',
+                        name: 'Jeralee Gouldie',
                         startTime: new Date('2018-02-22T14:00:00'),
                         type: 'custom'
                     }

@@ -12,7 +12,8 @@ import styles from './TrainerInfor.module.css'
 // Thông tin chi tiết của mỗi học viên
 
 function TrainerInfor(id) {
-    
+    //console.log(localStorage.getItem('ID'));
+    //console.log(id);
     let [nameUpdating, setNameUpdating] = useState(false);
     let [phone_numberUpdating, setphone_numberUpdating] = useState(false);
     let [date_of_birthUpdating, setdate_of_birthUpdating] = useState(false);
@@ -55,7 +56,7 @@ function TrainerInfor(id) {
     useEffect(() => {
         (async () => {
             let response = await userProfileAPI.getProfile(id);
-            console.log(id)
+            console.log(response);
             //console.log(response.data.data)
             //let data = JSON.parse(response.data);
             //console.log(typeof(data))
@@ -63,6 +64,7 @@ function TrainerInfor(id) {
             if (response && response.status && response.data.data) {
                 userProfile = { ...response.data.data[0] };
                 setUserProfile((userProfile));
+                //localStorage.removeItem('ID');
                // console.log((userProfile.phone_number));
             }
         })()
@@ -100,13 +102,14 @@ function TrainerInfor(id) {
 
     //Update Profile
     const handleUpdate = async () => {
-        console.log(userProfile);
+        
+        
         setShowPopup(prev => !prev)
-        // const response = await userProfileAPI.updateProfile(userProfile);
-        // if(response && response.status) setShowPopup(prev => !prev);
-        // if(response && !response.status && response.message) {
-        //     alert(response.message)
-        // }
+        const response = await userProfileAPI.updateProfile(userProfile)
+        if(response && response.status) setShowPopup(prev => !prev);
+        if(response && response.data.error) {
+            alert(response.data.error)
+        }
     }
 
 

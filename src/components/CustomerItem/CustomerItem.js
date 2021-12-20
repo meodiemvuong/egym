@@ -10,20 +10,7 @@ import styles from './CustomerItem.module.css'
 
 function CustomerItem() {
     const [items, setItems] = useState([])
-    let url=`http://localhost:8080/cnpm/student`;
-    // function getTrainer(callback){
-    //     fetch(url).then(response=>{return response.json()}).then(callback)
-    // }
-    // function start(){
-    //     getTrainer(res=>{
-    //         console.log(res.data);
-    //         var items = res.data;
-    //         renderCourse(items);
-    //     })
-        
-        
-    // }
-    // start()
+    let url=`http://localhost:8080/cnpm/student`;  
     useEffect(() => {
 
     fetch(url)
@@ -36,7 +23,10 @@ function CustomerItem() {
         <div className="">                              
                 {items.map((item, index) =>
                     <div key ={index} classname="">
-                            <div to='/' className={clsx(styles.wrapper)}>
+                        {localStorage.setItem('IDS',item.id)}
+                        {localStorage.setItem('role',"student")}
+        <div to='/' className={clsx(styles.wrapper)}>
+                    
             <Link to={`detail/${item.id}`} className={clsx(styles.content)}>
                 <div className={clsx(styles.avatarField)}>
                     <div
@@ -81,32 +71,13 @@ function CustomerItem() {
                     <div className={clsx(styles.inforContent)}>{item.phone_number}</div>
                 </div>
 
-                <div className={clsx(styles.inforField)}>
-                    <i
-                        class={clsx(styles.inforIcon, styles.phone, "fas fa-chalkboard-teacher")}
-                        style={{
-                            color: 'rgb(48, 48, 240)'
-                        }}
-                    ></i>
-                    <div className={clsx(styles.inforContent)}>{item.name}</div>
-                </div>
 
             </Link>
 
             
         </div>
-                            {/* {item.name} */}
-                            {/* <Link to={`detail/${item.id}`} className="trainer-link">
-                                <div className="col">
-                                <div className="trainer-wrapper ">
-                                    <div className="trainer-infor">
-                                        <div className="trainer-name col">{item.name}</div>
-                                        <div className="trainer-age col">{item.id}</div>
-                                    </div>
-                                </div>
-                                </div>
-                            </Link> */}
-                        </div>
+                            
+        </div>
                 
         )}
         </div>

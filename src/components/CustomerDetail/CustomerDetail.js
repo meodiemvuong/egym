@@ -11,11 +11,13 @@ import { Schedule, AdminHeader, CustomerInfor } from './../';
 function CustomerDetail({ admin }) {
     const id = useParams();
     var ID ;
-    if(id.id=null){
+    if(id.id && localStorage.getItem('ID')==null){
         ID = id.id;
+    } else if(localStorage.getItem('ID')!=null){
+        ID = localStorage.getItem('ID');
     }
     else {
-        ID = localStorage.getItem('ID');
+        ID = localStorage.getItem('IDS');
     }
     return (
         <div className={clsx(styles.customerWrapper)}>

@@ -1,15 +1,195 @@
-import React from 'react'
+import React, { useState} from 'react'
 import clsx from 'clsx'
-import {AdminHeader} from './../'
 
 import styles from './AddCustomer.module.css'
+import { AdminHeader, Popup } from './../'
+import addProfile from '../../api/addProfile';
+import { useNavigate } from 'react-router-dom';
 
-// Trang thêm học viên
+// Trang thêm huấn luyện viên
 
 function AddCustomer() {
+    let [userState, setUserState] = useState({});
+    const Navigate = useNavigate();
+    let params = {
+        "username": userState.username,
+        "password": userState.password,
+    }
+    let [showPopup, setShowPopup] = useState(false);
+
+    const handleAddtrainer = async(e)=>{
+        var responseID = await addProfile.addStudent(params);
+        console.log(responseID)
+       
+            if (showPopup) {
+                var id = setTimeout(() => {
+                    showPopup = false;
+                    setShowPopup(showPopup);
+                }, 2000)
+            }
+            return () => {
+                clearTimeout(id);
+            }
+        
+        
+    }
+
     return (
-        <div>
-            <AdminHeader heading="Thêm học viên"/>
+        <div className={clsx(styles.wrapper)}>
+            <AdminHeader heading="Thêm huấn luyện viên" />
+            <div className="grid">
+                <div className="row">
+                    <div className="col l-6">
+                        <div className={clsx(styles.content)}>
+
+                            <div className={clsx(styles.contentField)}>
+                                {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
+                                <i class="fas fa-user-circle"></i>
+                                {/* <input
+                                    type="text"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Tài khoản"
+                                /> */}
+                                <input
+                                    className="userinput"
+                                    type="text"
+                                    name="username"
+                                    id="username"
+                                    placeholder="Tài khoản"
+                                    onChange={(e) => {
+                                        const username = e.target.value;
+                                        setUserState({ ...userState, username });
+                                    }}
+                                />
+                            </div>
+                            
+
+                            <div className={clsx(styles.contentField)}>
+                                {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
+                                <i class="fas fa-unlock-alt"></i>
+                                <input
+                                    className="userinput"
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    placeholder="Mật khẩu"
+                                    onChange={(e) => {
+                                        const password = e.target.value;
+                                        setUserState({ ...userState, password });
+                                    }}
+                                />
+                                {/* <input
+                                    type="password"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Mật khẩu"
+                                /> */}
+                            </div>
+
+                            <div className={clsx(styles.contentField)}>
+                                {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
+                                <i class="fas fa-unlock-alt"></i>
+                                <input
+                                    type="password"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Xác nhận mật khẩu"
+                                />
+                            </div>
+
+                            {/* <div className={clsx(styles.contentField)}>
+                                
+                                <i class="fas fa-user"></i>
+                                <input
+                                    type="text"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Nhập họ và tên"
+                                />
+                            </div> */}
+
+                            <div className={clsx(styles.contentField)}>
+                                {/* <h2 className={clsx(styles.contentLabel)}>Tuổi</h2> */}
+                                {/* <i class="fas fa-birthday-cake"></i>
+                                <input
+                                    type="text"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Nhập tuổi"
+                                /> */}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="col l-6">
+                        <div className={clsx(styles.content)}>
+                            {/* <div className={clsx(styles.contentField)}>
+
+                                <i class="fas fa-transgender"></i>
+                                <select
+                                    value={trainerGender} id=""
+                                    onChange={(e) => {
+                                        trainerGender = e.target.value;
+                                        setTrainerGender(trainerGender)
+                                        console.log(trainerGender)
+                                    }}
+                                >
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </div> */}
+
+                            {/* <div className={clsx(styles.contentField)}>
+                                
+                                <i class="fas fa-mobile"></i>
+                                <input
+                                    type="text"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Nhập số điện thoại"
+                                />
+                            </div> */}
+
+                            {/* <div className={clsx(styles.contentField)}>
+                                
+                                <i class="fas fa-text-height"></i>
+                                <input
+                                    type="text"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Nhập chiều cao"
+                                />
+                            </div> */}
+
+                            {/* <div className={clsx(styles.contentField)}>
+                                
+                                <i class="fas fa-weight"></i>
+                                <input
+                                    type="text"
+                                    className={clsx(styles.contentText)}
+                                    placeholder="Nhập cân nặng"
+                                />
+                            </div> */}
+
+
+                            <div className={clsx(styles.contentField)}>
+                                
+                                <i class="fas fa-save"></i>
+                                <button
+                                    onClick={() => {
+                                        handleAddtrainer();                                        
+                                        showPopup = true;
+                                        setShowPopup(showPopup);
+                                        
+                                    }}
+                                    className={clsx(styles.trainerAddBtn)}>
+                                    Thêm học viên
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <Popup trigger={showPopup} message="Thêm thành công" />
+            
         </div>
     )
 }

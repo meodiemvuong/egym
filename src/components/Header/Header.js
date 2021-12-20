@@ -2,15 +2,11 @@ import React, { useState } from "react";
 import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import './Header.css'
 import logo from './../../store/imgs/logo.png';
-import { useSelector } from 'react-redux'
-import authAPI from "./../../api/authAPI";
-
-
 
 function Header() {
-    var user = null;
-    const navigate = useNavigate();
+    var user;
     user = localStorage.getItem('ID');
+    const navigate = useNavigate();
     let [showOption, setShowOpTion] = useState(false);
 
     const handleShowOption = () => {
@@ -22,9 +18,9 @@ function Header() {
     } 
 
     const handleLogout = () => {
-        
-        localStorage.removeItem('account');
         navigate('/login');
+        localStorage.removeItem('ID');
+        localStorage.removeItem('role');
     }
 
     return (

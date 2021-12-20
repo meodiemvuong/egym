@@ -30,6 +30,7 @@ const authAPI = {
             
             let response = await axiosClient.post(url,params);
             console.log(response.data);
+            localStorage.setItem('ID', JSON.stringify(response.data.data[0].id))
             
             //localStorage.setItem('account', JSON.stringify(response.data.data[0]));
             //console.log(localStorage.getItem('account'));
@@ -46,8 +47,8 @@ const authAPI = {
         try {
             const url = '/auth/logout'
             //const response = await axiosClient.post(url);
-            localStorage.removeItem('account');
-            localStorage.removeItem('datatrainer');
+            //localStorage.removeItem('account');
+            //localStorage.removeItem('ID');
             store.dispatch(Actions.removeUserOutOfRedux(null))
         } catch (err) {
             alert(err.message);

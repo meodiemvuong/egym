@@ -38,7 +38,8 @@ function TrainerItem() {
             <div className="row">                              
                     {items.map((item, index) =>
                             <div key ={index} classname="col-md-12">
-                                {/* {item.name} */}
+                                {localStorage.setItem('IDT',item.id)}
+                                {localStorage.setItem('role',"trainer")}
                                 <Link to={`detail/${item.id}`} className="trainer-link">
                                     <div className="col">
                                     <div className="trainer-wrapper ">

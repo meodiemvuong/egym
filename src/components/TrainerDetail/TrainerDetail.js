@@ -9,12 +9,15 @@ import TrainerInfor from '../TrainerInfor/TrainerInfor'
 function TrainerDetail({ admin }) {
     const id = useParams();
     var ID ;
-    if(id.id=null){
+    if(id.id){
         ID = id.id;
-    }
-    else {
+    } else if(localStorage.getItem('ID')!='null'){
         ID = localStorage.getItem('ID');
     }
+    else {
+        ID = localStorage.getItem('IDT');
+    }
+    
     return (
         <div className={clsx(styles.wrapper)}>
             {admin && <AdminHeader heading="Thông tin huấn luyện viên" />}

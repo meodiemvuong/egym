@@ -8,40 +8,30 @@ import addProfile from '../../api/addProfile';
 // Trang thêm huấn luyện viên
 
 function AddTrainer() {
-    let [trainerName, setTrainerName] = useState("");
-    let [trainerAge, setTrainerAge] = useState("");
-    let [trainerGender, setTrainerGender] = useState("Nam");
-    let [trainerPhone, setTrainerPhone] = useState("");
-    let [trainerHeight, setTrainerHeight] = useState("");
-    let [trainerWeight, setTrainerWeight] = useState("");
     let [userState, setUserState] = useState({});
     
     let params = {
-        "username": useState.username,
-        "password": useState.password,
+        "username": userState.username,
+        "password": userState.password,
     }
     let [showPopup, setShowPopup] = useState(false);
 
-    useEffect(() => {
-        if (showPopup) {
-            var id = setTimeout(() => {
-                showPopup = false;
-                setShowPopup(showPopup);
-            }, 2000)
-        }
-        return () => {
-            clearTimeout(id);
-        }
-    }, [showPopup])
-
-    useEffect(() => {
-        (async () => {
-            const responseID = await addProfile.addTrainer(params);
-
-            console.log(responseID)
-            //const responseAID = await addProfile.p
-        })()
-    }, [])
+    const handleAddtrainer = async(e)=>{
+        const responseID = await addProfile.addTrainer(params);
+        console.log(responseID)
+       
+            if (showPopup) {
+                var id = setTimeout(() => {
+                    showPopup = false;
+                    setShowPopup(showPopup);
+                }, 2000)
+            }
+            return () => {
+                clearTimeout(id);
+            }
+        
+        
+    }
 
     return (
         <div className={clsx(styles.wrapper)}>
@@ -77,10 +67,21 @@ function AddTrainer() {
                                 {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
                                 <i class="fas fa-unlock-alt"></i>
                                 <input
+                                    className="userinput"
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    placeholder="Mật khẩu"
+                                    onChange={(e) => {
+                                        const password = e.target.value;
+                                        setUserState({ ...userState, password });
+                                    }}
+                                />
+                                {/* <input
                                     type="password"
                                     className={clsx(styles.contentText)}
                                     placeholder="Mật khẩu"
-                                />
+                                /> */}
                             </div>
 
                             <div className={clsx(styles.contentField)}>
@@ -93,15 +94,15 @@ function AddTrainer() {
                                 />
                             </div>
 
-                            <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
+                            {/* <div className={clsx(styles.contentField)}>
+                                
                                 <i class="fas fa-user"></i>
                                 <input
                                     type="text"
                                     className={clsx(styles.contentText)}
                                     placeholder="Nhập họ và tên"
                                 />
-                            </div>
+                            </div> */}
 
                             <div className={clsx(styles.contentField)}>
                                 {/* <h2 className={clsx(styles.contentLabel)}>Tuổi</h2> */}
@@ -117,7 +118,7 @@ function AddTrainer() {
                     </div>
                     <div className="col l-6">
                         <div className={clsx(styles.content)}>
-                            <div className={clsx(styles.contentField)}>
+                            {/* <div className={clsx(styles.contentField)}>
 
                                 <i class="fas fa-transgender"></i>
                                 <select
@@ -131,17 +132,17 @@ function AddTrainer() {
                                     <option value="Nam">Nam</option>
                                     <option value="Nữ">Nữ</option>
                                 </select>
-                            </div>
+                            </div> */}
 
-                            <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Số điện thoại</h2> */}
+                            {/* <div className={clsx(styles.contentField)}>
+                                
                                 <i class="fas fa-mobile"></i>
                                 <input
                                     type="text"
                                     className={clsx(styles.contentText)}
                                     placeholder="Nhập số điện thoại"
                                 />
-                            </div>
+                            </div> */}
 
                             {/* <div className={clsx(styles.contentField)}>
                                 
@@ -171,8 +172,9 @@ function AddTrainer() {
                                     onClick={() => {
                                         showPopup = true;
                                         setShowPopup(showPopup);
+                                        handleAddtrainer();
                                     }}
-                                    className={clsx(styles.trainerAddBtn, styles.inactive)}>
+                                    className={clsx(styles.trainerAddBtn)}>
                                     Thêm huấn luyện viên
                                 </button>
                             </div>

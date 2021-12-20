@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Footer, TrainerDetail, TrainerInfor } from '../components'
+import { Header, Footer, TrainerDetail} from '../components'
 
 
 function TrainerPage() {

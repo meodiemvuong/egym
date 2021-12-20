@@ -19,13 +19,15 @@ function CustomerList() {
                             <i class={clsx(styles.optionIcon, "fas fa-search")}></i>
                             Tìm kiếm
                         </Link>
-                        <Link to='/' className={clsx(styles.optionBtn)}>
+                        <Link to='/admin/customers/add' className={clsx(styles.optionBtn)}>
                             <i className={clsx(styles.optionIcon, "fas", "fa-user-plus")}></i>
                             Thêm
                         </Link>
                     </div>
                 </div>
+                <div clasname="">
                 <CustomerItem />
+                </div>
                 
                 {/* <CustomerInfor /> */}
             </div>
