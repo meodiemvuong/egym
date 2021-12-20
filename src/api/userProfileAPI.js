@@ -29,7 +29,7 @@ const userProfileAPI = {
         }
 
         try{
-            const response = await axiosClient.put(url,params);
+            const response = await axiosClient.put(url,(params));
             console.log(response)
             if(response.data.error=='null'){
                 console.log("Cap nhat thanh cong");

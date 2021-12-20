@@ -10,7 +10,7 @@ import styles from './CustomerInfor.module.css'
 // Thông tin chi tiết của mỗi học viên
 
 function CustomerInfor(id) {
-    console.log(id);
+    //console.log(id);
     //id = localStorage.getItem('ID');
     let [nameUpdating, setNameUpdating] = useState(false);
     let [phone_numberUpdating, setphone_numberUpdating] = useState(false);
@@ -64,12 +64,12 @@ function CustomerInfor(id) {
             }
         })()
     }, [])
-    console.log(userProfile)
+    //console.log(userProfile)
     // Upload Avatar
 
     const handleUploadAvatar = async (e) => {
         // Upload lên Cloudinary
-
+        
         const files = e.target.files;
         const data = new FormData();
         data.append('file', files[0]);
@@ -115,16 +115,15 @@ function CustomerInfor(id) {
 
 
     //Update Profile
-    const handleUpdate = async () => {
+    
+    const handleUpdate = async (ID) => {
         setShowPopup(prev => !prev)
         const response = await userProfileAPI.updateProfile(userProfile)
-        if(response && response.status) setShowPopup(prev => !prev);
+        if(response && response.data) setShowPopup(prev => !prev);
         if(response && response.data.error) {
             alert(response.data.error)
         }
     }
-
-
     return (
         <div className="grid">
 
@@ -203,7 +202,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setNameUpdating(prev => !prev);
-                                            handleUpdate();
+                                            handleUpdate(userProfile);
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -264,7 +263,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setphone_numberUpdating(prev => !prev);
-                                            handleUpdate();
+                                            handleUpdate(userProfile);
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -325,7 +324,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setdate_of_birthUpdating(prev => !prev);
-                                            handleUpdate();
+                                            handleUpdate(userProfile);
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -388,7 +387,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setsexUpdating(prev => !prev);
-                                            handleUpdate();
+                                            handleUpdate(userProfile);
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -449,7 +448,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setdescriptionUpdating(prev => !prev);
-                                            handleUpdate();
+                                            handleUpdate(userProfile);
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -478,13 +477,13 @@ function CustomerInfor(id) {
                                     <input
                                         readOnly={!heightUpdating}
                                         ref={heightRef}
-                                        type="int"
+                                        type="double"
                                         className={clsx(styles.inforText)}
                                         value={userProfile.height}
                                         onChange={(e) => {
                                             setUserProfile(prev => ({
                                                 ...userProfile,
-                                                height: e.target.value
+                                                height: parseFloat(e.target.value)
                                             }))
                                         }}
                                         id='trainer-height' />
@@ -510,7 +509,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setheightUpdating(prev => !prev);
-                                            handleUpdate();
+                                            handleUpdate(userProfile);
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -539,13 +538,13 @@ function CustomerInfor(id) {
                                     <input
                                         readOnly={!weightUpdating}
                                         ref={weightRef}
-                                        type="int"
+                                        type="double"
                                         className={clsx(styles.inforText)}
                                         value={userProfile.weight}
                                         onChange={(e) => {
                                             setUserProfile(prev => ({
                                                 ...userProfile,
-                                                weight: e.target.value
+                                                weight: parseFloat(e.target.value)
                                             }))
                                         }}
                                         id='trainer-weight' />
@@ -571,7 +570,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setweightUpdating(prev => !prev);
-                                            handleUpdate();
+                                            handleUpdate(userProfile);
                                         }}
                                     >
                                         <i class="fas fa-save"></i>

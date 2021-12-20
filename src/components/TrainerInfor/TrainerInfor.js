@@ -69,7 +69,7 @@ function TrainerInfor(id) {
             }
         })()
     }, [])
-    console.log(userProfile)
+    //console.log(userProfile)
 
     // Upload Avatar
 
@@ -96,7 +96,7 @@ function TrainerInfor(id) {
 
         setUserProfile(userProfile)
         console.log(file);
-        console.log(userProfile)
+        //console.log(userProfile)
     }
 
 
