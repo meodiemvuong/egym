@@ -7,6 +7,11 @@ function Requirement(id, scheId, cate){
     let [req,setReq] = useState({
         id: parseInt(id),
         category: 1,
+        newTime:{
+            start: "05:00",
+            finish: "06:00",
+            dayOfWeek: 2
+        }
         
     });
     let [loginFalse, setLoginFalse] = useState(false);

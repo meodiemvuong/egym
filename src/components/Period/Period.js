@@ -58,6 +58,9 @@ function Period(id) {
             <button className='trainerAddBtn'
             onClick={()=>{
                 handleClick1();
+                // setIsClicked1(false);
+                setIsClicked2(false);
+                setIsClicked3(false);
                 
         }}>
         Thêm
@@ -87,6 +90,9 @@ function Period(id) {
             onClick={()=>{
                 setScheId(sche.scheduleId)
                 handleClick2();
+                setIsClicked1(false);
+                // setIsClicked2(false);
+                setIsClicked3(false);
                 
         }}>
         Sửa
@@ -96,6 +102,9 @@ function Period(id) {
         onClick={()=>{
             setScheId(sche.scheduleId)
             handleClick3();
+            setIsClicked1(false);
+            setIsClicked2(false);
+            // setIsClicked3(false);
         }}>
         Xoá
         </button>        
