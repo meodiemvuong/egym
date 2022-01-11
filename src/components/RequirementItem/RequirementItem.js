@@ -2,12 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import RequirementAPI from '../../api/Requirement';
-
-
-
-
-
-
+import './RequirementItem.css'
 function RequirementItem(id) {
 
     const [items, setItems] = useState([])
@@ -57,7 +52,7 @@ function RequirementItem(id) {
         let response = RequirementAPI.Deny(params)
         
     }
-    console.log(items)
+    
     return (
         <div className='' >
             <div  >
@@ -80,28 +75,31 @@ function RequirementItem(id) {
         { item.category === -1 &&<td>Xoá</td>}		
         {item.oldTime && <td>{item.oldTime.start}-{item.oldTime.finish}, Thứ {item.oldTime.dayOfWeek}</td>}
         {!item.oldTime && <td></td>}
-        {item.category === 1||item.category===0 && <td>{item.newTime.start}-{item.newTime.finish}, Thứ {item.newTime.dayOfWeek}</td>}
+        {item.category === 1 && <td>{item.newTime.start}-{item.newTime.finish}, Thứ {item.newTime.dayOfWeek}</td>}
+        {item.category === 0 && <td>{item.newTime.start}-{item.newTime.finish}, Thứ {item.newTime.dayOfWeek}</td>}
         {item.category === -1&&<td></td>}	
         {localStorage.getItem('role')=="trainer"&&<td>{item.studentName}</td>}
         {localStorage.getItem('role')==="trainer"&&<td>
-        <button 
+        <button  className='trainerAddBtn'
         onClick={() => {
             localStorage.setItem('requireId',item.requireId);
             let choice = window.confirm("bạn chắc kk")
             if(choice==true && !ud){
             handleAccept(); 
+            window.location.reload();
             } else {
             return
             }                                        
         }}>
         Chấp nhận
         </button>
-        <button 
+        <button  className='trainerAddBtn'
         onClick={() => {
             localStorage.setItem('requireId',item.requireId);
             let choice = window.confirm("bạn chắc kk")
             if(choice==true && !ud){
             handleDeny(); 
+            window.location.reload();
             } else {
             return
             }                                        
@@ -116,6 +114,7 @@ function RequirementItem(id) {
             let choice = window.confirm("bạn chắc kk")
             if(choice==true && !ud){
             handleDeny(); 
+            window.location.reload();
             } else {
             return
             }                                        

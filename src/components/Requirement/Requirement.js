@@ -9,6 +9,8 @@ function Requirement(id, scheId, cate){
         category: 1,
         
     });
+    let [loginFalse, setLoginFalse] = useState(false);
+    let [err, setErr] = useState(null)
     let [finish, setFinish]= useState("");
     let [start, setStart]= useState("");
     let [ud, setUd] = useState(false)
@@ -31,8 +33,6 @@ function Requirement(id, scheId, cate){
         if(scheId!==undefined && cate!==-1){
             
             setReq({...req, newTime,scheduleId: scheId,category:0});
-        }if(cate===-1){
-            setReq({category:-1,scheduleId:scheId,id: parseInt(id)})
         } 
         else{
             setReq({...req, newTime});
@@ -44,15 +44,26 @@ function Requirement(id, scheId, cate){
         console.log(req)
         setShowPopup(prev => !prev)
         const response = await Schedule.requirement(req)
-        console.log(response)
+        if(response.error[0]!=null){
+            setErr(response.error[0]);
+            setLoginFalse(true);
+        }else{
+            window.location.reload();
+        }
     }
     const handleDelete = async(e)=>{
         let p = {category:-1,scheduleId:scheId,id: parseInt(id)}
         setShowPopup(prev => !prev)
         const response = await Schedule.requirement(p)
-        console.log(response)
+        if(response.error[0]!=null){
+            setErr(response.error[0]);
+            setLoginFalse(true);
+        }else{
+            window.location.reload();
+        }
+        console.log(loginFalse)
     }
-    
+    // console.log(req)
     return (
         <div className="grid">
                 {!cate &&<div className="row">
@@ -165,7 +176,7 @@ function Requirement(id, scheId, cate){
                                     </select>
                             </div>
                             </div>
-                            
+                            {loginFalse && <h2 className="login-false">{err}</h2>}
                         </div>
                     </div>
                     <div className="col l-4">
@@ -176,6 +187,7 @@ function Requirement(id, scheId, cate){
                                 <button
                                     onClick={() => {
                                         handleAddRequire();
+                
                                     }}
                                     className={clsx(styles.trainerAddBtn)}>
                                     Gửi yêu cầu
@@ -192,11 +204,12 @@ function Requirement(id, scheId, cate){
     <div className={clsx(styles.content)}>
         <div className={clsx(styles.contentField)}>
             
-            
+            {loginFalse && <h2 className="login-false">{err}</h2>}
             <button
                 onClick={() => {
                     setUd(true);
                     handleDelete();
+                    
                 }}
                 className={clsx(styles.trainerAddBtn)}>
                 Gửi yêu cầu
