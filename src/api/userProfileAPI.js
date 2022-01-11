@@ -34,26 +34,29 @@ const userProfileAPI = {
             if(response.data.error=='null'){
                 console.log("Cap nhat thanh cong");
             } else {
-                console.log("Khong thanh cong");
+                console.log(response.data.error[0]);
             }
         } catch(e){
             alert(e.message);
         }
 
 
+    },
+    getAccount: async(id)=>{
+        let url =`/account-student?id=${id}`
+        try{
+            const response = await axiosClient.get(url);
+            //console.log(response)
+            if(response.data.error=='null'){
+                //console.log("Cap nhat thanh cong");
+                console.log(response)
+            } else {
+                //console.log("Khong thanh cong");
+            }
+            return response;
+        } catch(e){
+            alert(e.message);
+        }
     }
-    
-
-    // getProfileTrainer: async () => {
-    //     try{
-    //     let url = '/trainer';
-    //     let response = await axiosClient.get(url);
-    //     //console.log(response.data.data)
-    //     return response
-        
-    // } catch(e) {
-    //     alert(e.message)
-    // }
-
 }
 export default userProfileAPI

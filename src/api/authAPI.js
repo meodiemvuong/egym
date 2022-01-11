@@ -23,7 +23,7 @@ const authAPI = {
             if(JSON.parse(params).role==='trainer'){
                 url='/authentication-trainer';
             } 
-            if(JSON.parse(params).role==='customer'){
+            if(JSON.parse(params).role==='student'){
                 url='/authentication-student';
             } 
             

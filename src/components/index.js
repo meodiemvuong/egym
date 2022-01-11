@@ -19,9 +19,10 @@ import AddCustomer from './AddCustomer/AddCustomer';
 import Popup from './Popup/Popup';
 import CustomerInfor from './CustomerInfor/CustomerInfor';
 import TrainerInfor from './TrainerInfor/TrainerInfor';
+import Content from './Content/Content';
 
 
 export { Header, Footer, Login, Banner, ScrollToTop }
 export { Admin, TrainerList, CustomerList, Category, TrainerItem, CustomerItem, AdminWelcome };
 export { CustomerDetail, TrainerDetail, AdminHeader, Schedule };
-export { AddTrainer, AddCustomer, Popup, CustomerInfor, TrainerInfor };
+export { AddTrainer, AddCustomer, Popup, CustomerInfor, TrainerInfor, Content };

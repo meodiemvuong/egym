@@ -6,18 +6,16 @@ import styles from './Category.module.css'
 import avatar from './../../store/imgs/logo.png'
 
 function Category() {
-    let [trainerCustomer, setTrainerCustomer] = useState(false);
     return (
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.header)}>
                 <img src={avatar} alt="" className={clsx(styles.headerImg)} />
                 <div className={clsx(styles.headerHeading)}>
                     <div className={clsx(styles.primaryHeading)}>
-                        Admin
+                        <Link className={clsx(styles.itemLink)} to="/">Admin</Link>
+                        
                     </div>
-                    {/* <div className={clsx(styles.subHeading)}>
-                        Admin
-                    </div> */}
+                    
                 </div>
             </div>
             <ul className={clsx(styles.categoryList)}>

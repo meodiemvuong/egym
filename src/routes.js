@@ -5,6 +5,7 @@ import Notfoundpage from './pages/Notfoundpage';
 import AdminPage from './pages/AdminPage';
 import TrainerPage from './pages/TrainerPage';
 import CustomerPage from './pages/CustomerPage';
+import EventPage from './pages/EventPage'
 
 
 const routes = [
@@ -29,9 +30,14 @@ const routes = [
         element: <CustomerPage/>
     },
     {
+        path: '/event',
+        element: <EventPage/>
+    },
+    {
         path: '*',
         element: <Notfoundpage/>
     }
+
 ]
 
 export default routes;

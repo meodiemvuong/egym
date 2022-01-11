@@ -8,10 +8,7 @@ import * as Actions from './store/actions'
 
 
 function App() {
-
     const dispatch = useDispatch();
-    
-
     useEffect(() => {
         let token = localStorage.getItem('token');
         console.log("token: ", token);

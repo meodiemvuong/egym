@@ -6,6 +6,9 @@ import logo from './../../store/imgs/logo.png';
 function Header() {
     var user;
     user = localStorage.getItem('ID');
+    if(localStorage.getItem('ID')==null){
+        user = localStorage.getItem('role');
+    }
     const navigate = useNavigate();
     let [showOption, setShowOpTion] = useState(false);
 
@@ -14,6 +17,9 @@ function Header() {
     }
     const handleinfor = () => {
         let url = `/${localStorage.getItem('role')}`;
+        if(localStorage.getItem('role')==="student"){
+            url = '/customer';
+        }
         navigate(url);
     } 
 
@@ -30,13 +36,13 @@ function Header() {
                     <div className="logo-navbar">
                         <div className="header-logo">
                             <Link to='/'><img src={logo} alt="" className="logo-img" /></Link>
-                            <Link to='/' className="logo-name">RUBYGYM</Link>
+                            <Link to='/' className="logo-name">RubyGym</Link>
                         </div>
                         <nav className="header-navbar">
                             <ul className="nav-list">
                                 <li className="nav-item"><NavLink to="/">Trang chủ</NavLink></li>
-                                <li className="nav-item"><NavLink to="/">Dịch vụ</NavLink></li>
-                                <li className="nav-item"><NavLink to="/">Góp ý - Phản hồi</NavLink></li>
+                                <li className="nav-item"><NavLink to="/event">Sự kiện</NavLink></li>
+                                {/* <li className="nav-item"><NavLink to="/">Góp ý - Phản hồi</NavLink></li> */}
                             </ul>
                         </nav>
                     </div>

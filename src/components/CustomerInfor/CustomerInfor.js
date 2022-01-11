@@ -35,8 +35,8 @@ function CustomerInfor(id) {
         date_of_birth: '',
         sex: 'Nam',
         description: '',
-        height: null,
-        weight: null,
+        height: 0.0,
+        weight: 0.0,
         avatar: '',
         bmi: null,
     });
@@ -55,17 +55,39 @@ function CustomerInfor(id) {
 
     // Lấy profile về
     useEffect(() => {
+        
         (async () => {
             const response = await userProfileAPI.getProfile(id);
             if (response && response.data && response.data.data[0]) {
                 userProfile = { ...response.data.data[0] };
                 setUserProfile(userProfile);
-                //localStorage.removeItem('ID');
+                
+            }
+            const res = await userProfileAPI.getAccount(id);
+            if (response && response.data && response.data.data[0]) {
+                var d1 = new Date();
+                userProfile = { ...userProfile, expire: res.data.data[0].expire };
+                var d2 = new Date(res.data.data[0].expire)
+                
+                setUserProfile(userProfile);
+                if(d2>d1){
+                // alert("Thời hạn tài khoản của bạn là: " + d2)
+                } else{
+                    alert("Bạn cần liên hệ Admin để gia hạn tài khoản")
+                }
             }
         })()
     }, [])
-    //console.log(userProfile)
-    // Upload Avatar
+    
+    
+    const handleUpdate = async () => {
+        setShowPopup(prev => !prev)
+        const response = await userProfileAPI.updateProfile(userProfile)
+        if(response && response.data) setShowPopup(prev => !prev);
+        if(response && response.data.error) {
+            alert(response.data.error)
+        }
+    }
 
     const handleUploadAvatar = async (e) => {
         // Upload lên Cloudinary
@@ -79,51 +101,16 @@ function CustomerInfor(id) {
             method: 'POST',
             body: data
         })
-
         const file = await response.json();
         userProfile = {
             ...userProfile,
-            avatar: file.secure_url
+            avatar: 'file.secure_url'
         }
-
-        // const response = await userProfileAPI.updateAvatar(data)
-
         setUserProfile(userProfile)
         console.log(file);
-        //console.log(userProfile)
-
-        //================================================================
-
-        // Upload lên server
-        // const file = e.target.files[0];
-        // const formData = new FormData();
-        // formData.append('File', file);
-
-        // const response = await userProfileAPI.updateAvatar(formData);
-
-        // if(response && response.status && response.data) {
-        //     userProfile = {
-        //         ...userProfile,
-        //         avatar: response.data
-        //     }
-        //     setUserProfile(userProfile);
-        // }
-        // if(response && !response.status) {
-        //     alert(response.message)
-        // }
+        handleUpdate();
     }
 
-
-    //Update Profile
-    
-    const handleUpdate = async (ID) => {
-        setShowPopup(prev => !prev)
-        const response = await userProfileAPI.updateProfile(userProfile)
-        if(response && response.data) setShowPopup(prev => !prev);
-        if(response && response.data.error) {
-            alert(response.data.error)
-        }
-    }
     return (
         <div className="grid">
 
@@ -202,7 +189,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setNameUpdating(prev => !prev);
-                                            handleUpdate(userProfile);
+                                            handleUpdate();
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -263,7 +250,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setphone_numberUpdating(prev => !prev);
-                                            handleUpdate(userProfile);
+                                            handleUpdate();
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -324,7 +311,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setdate_of_birthUpdating(prev => !prev);
-                                            handleUpdate(userProfile);
+                                            handleUpdate();
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -387,7 +374,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setsexUpdating(prev => !prev);
-                                            handleUpdate(userProfile);
+                                            handleUpdate();
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -448,7 +435,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setdescriptionUpdating(prev => !prev);
-                                            handleUpdate(userProfile);
+                                            handleUpdate();
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -477,7 +464,7 @@ function CustomerInfor(id) {
                                     <input
                                         readOnly={!heightUpdating}
                                         ref={heightRef}
-                                        type="double"
+                                        type="number"
                                         className={clsx(styles.inforText)}
                                         value={userProfile.height}
                                         onChange={(e) => {
@@ -509,7 +496,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setheightUpdating(prev => !prev);
-                                            handleUpdate(userProfile);
+                                            handleUpdate();
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -538,7 +525,7 @@ function CustomerInfor(id) {
                                     <input
                                         readOnly={!weightUpdating}
                                         ref={weightRef}
-                                        type="double"
+                                        type="number"
                                         className={clsx(styles.inforText)}
                                         value={userProfile.weight}
                                         onChange={(e) => {
@@ -570,7 +557,7 @@ function CustomerInfor(id) {
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
                                             setweightUpdating(prev => !prev);
-                                            handleUpdate(userProfile);
+                                            handleUpdate();
                                         }}
                                     >
                                         <i class="fas fa-save"></i>
@@ -592,6 +579,9 @@ function CustomerInfor(id) {
                                 }
                             </div>
                         </div>
+                    </div>
+                    <div className={clsx(styles.inforContent)}>
+                        <h2 className={clsx(styles.heading)}>Thời hạn tài khoản: {userProfile.expire}</h2>
                     </div>
                 </div>
             </div>

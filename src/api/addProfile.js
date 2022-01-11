@@ -49,6 +49,17 @@ const addProfile = {
         } catch(err){
             alert(err.message);
         }
+    },
+    addService: async(params)=>{
+        try{
+            let url ='/account-student';
+            console.log(params)
+            let response = await axiosClient.put(url,params);
+            console.log(response);
+            return response
+        }catch{
+
+        }
     }
     
 

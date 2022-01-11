@@ -12,19 +12,6 @@ function TrainerItem() {
 
     const [items, setItems] = useState([])
     let url=`http://localhost:8080/cnpm/trainer`;
-    // function getTrainer(callback){
-    //     fetch(url).then(response=>{return response.json()}).then(callback)
-    // }
-    // function start(){
-    //     getTrainer(res=>{
-    //         console.log(res.data);
-    //         var items = res.data;
-    //         renderCourse(items);
-    //     })
-        
-        
-    // }
-    // start()
     useEffect(() => {
 
     fetch(url)
@@ -32,18 +19,20 @@ function TrainerItem() {
         .then (data => setItems(data.data))
     },[]);
 
-    console.log(items)
+    // console.log(items)
 
         return (
             <div className="row">                              
                     {items.map((item, index) =>
                             <div key ={index} classname="col-md-12">
-                                {localStorage.setItem('IDT',item.id)}
+                                
                                 {localStorage.setItem('role',"trainer")}
-                                <Link to={`detail/${item.id}`} className="trainer-link">
+                                <Link to={`detail/${item.id}`} className="trainer-link" onClick={()=>{localStorage.setItem('IDT',item.id);console.log("hello")}} >
+                                
                                     <div className="col">
                                     <div className="trainer-wrapper ">
-                                        <div className="trainer-infor">
+                                        
+                                        <div className="trainer-infor" >
                                             <div className="trainer-name col">{item.name}</div>
                                             <div className="trainer-age col">{item.id}</div>
                                         </div>

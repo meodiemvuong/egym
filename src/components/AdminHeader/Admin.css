@@ -1,0 +1,75 @@
+:root {
+    --header-height: 75px;
+}
+
+.admin-main {
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 20px 0;
+}
+
+.admin-header-wrapper {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    left: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(27, 116, 116);
+    height: 60px;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    height: var(--header-height);
+}
+
+.admin-header-logo {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.admin-header-heading {
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    flex: 1;
+    text-align: center;
+    letter-spacing: 0.1em;
+
+}
+
+.admin-header-logout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(24, 223, 213);;
+    border-radius: 20px;
+    padding: 5px 10px;
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: white;
+}
+.admin-header-logout i{
+    color: white;
+    display: block;
+    padding: 3px 19px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.admin-header-logout:hover {
+    cursor: pointer;
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+}
+
+
+

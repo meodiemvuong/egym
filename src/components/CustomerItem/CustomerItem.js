@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 
@@ -10,23 +10,34 @@ import styles from './CustomerItem.module.css'
 
 function CustomerItem() {
     const [items, setItems] = useState([])
-    let url=`http://localhost:8080/cnpm/student`;  
+    const [account, setAccount] = useState([]
+        
+    )
+    
     useEffect(() => {
-
+    let url=`http://localhost:8080/cnpm/student`;  
     fetch(url)
         .then (response =>response.json())
         .then (data => setItems(data.data))
     },[]);
-
-    console.log(items)
+    useEffect(() => {
+        let url=`http://localhost:8080/cnpm/account-student`;  
+        fetch(url)
+            .then (response =>response.json())
+            .then (data => setAccount(data.data))
+        },[]);
     return (
-        <div className="">                              
+        <div className=""> 
+                                        
                 {items.map((item, index) =>
+                    account.map((acc,i) =>
                     <div key ={index} classname="">
                         {localStorage.setItem('IDS',item.id)}
                         {localStorage.setItem('role',"student")}
+                        
+                        
         <div to='/' className={clsx(styles.wrapper)}>
-                    
+            {  i ==index &&       
             <Link to={`detail/${item.id}`} className={clsx(styles.content)}>
                 <div className={clsx(styles.avatarField)}>
                     <div
@@ -42,8 +53,8 @@ function CustomerItem() {
                 </div>
 
                 <div className={clsx(styles.inforField)}>
-                    <div className={clsx(styles.inforContent, styles.status)}>Hoạt động</div>
-                    {/* <div className={clsx(styles.inforContent, styles.status)}>Hết hạn</div> */}
+                    {i===index && <div className={clsx(styles.inforContent, styles.status)}>{account[i].expire}</div>}
+                    
                 </div>
 
                 <div className={clsx(styles.inforField)}>
@@ -73,13 +84,13 @@ function CustomerItem() {
 
 
             </Link>
-
+}
             
         </div>
                             
         </div>
                 
-        )}
+                ))}
         </div>
     )
     

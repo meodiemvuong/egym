@@ -10,7 +10,7 @@ function AdminPage() {
     return (
         <>
             <Admin />
-            {/* <Footer /> */}
+            
         </>
     )
 }

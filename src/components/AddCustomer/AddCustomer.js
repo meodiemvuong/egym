@@ -14,24 +14,26 @@ function AddCustomer() {
     let params = {
         "username": userState.username,
         "password": userState.password,
+        "confirmPassword": userState.confirmPassword,
     }
     let [showPopup, setShowPopup] = useState(false);
-
-    const handleAddtrainer = async(e)=>{
-        var responseID = await addProfile.addStudent(params);
+    const handleAddStudent = async(e)=>{
+        if(params.confirmPassword===params.password){
+            showPopup = true;
+            setShowPopup(showPopup);
+        const responseID = await addProfile.addStudent(params);
         console.log(responseID)
-       
-            if (showPopup) {
-                var id = setTimeout(() => {
-                    showPopup = false;
-                    setShowPopup(showPopup);
-                }, 2000)
-            }
-            return () => {
-                clearTimeout(id);
-            }
-        
-        
+        if (showPopup) {
+            var id = setTimeout(() => {
+                showPopup = false;
+                setShowPopup(showPopup);
+            }, 2000)
+        }
+        return () => {
+            clearTimeout(id);
+        }
+        } else {alert("Mật khẩu không khớp, vui lòng thử lại"); return}
+            
     }
 
     return (
@@ -65,7 +67,7 @@ function AddCustomer() {
                             
 
                             <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
+                                
                                 <i class="fas fa-unlock-alt"></i>
                                 <input
                                     className="userinput"
@@ -78,15 +80,11 @@ function AddCustomer() {
                                         setUserState({ ...userState, password });
                                     }}
                                 />
-                                {/* <input
-                                    type="password"
-                                    className={clsx(styles.contentText)}
-                                    placeholder="Mật khẩu"
-                                /> */}
+                                
                             </div>
 
                             <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Họ và tên</h2> */}
+                                
                                 <i class="fas fa-unlock-alt"></i>
                                 <input
                                     type="password"
@@ -94,87 +92,16 @@ function AddCustomer() {
                                     placeholder="Xác nhận mật khẩu"
                                 />
                             </div>
-
-                            {/* <div className={clsx(styles.contentField)}>
-                                
-                                <i class="fas fa-user"></i>
-                                <input
-                                    type="text"
-                                    className={clsx(styles.contentText)}
-                                    placeholder="Nhập họ và tên"
-                                />
-                            </div> */}
-
-                            <div className={clsx(styles.contentField)}>
-                                {/* <h2 className={clsx(styles.contentLabel)}>Tuổi</h2> */}
-                                {/* <i class="fas fa-birthday-cake"></i>
-                                <input
-                                    type="text"
-                                    className={clsx(styles.contentText)}
-                                    placeholder="Nhập tuổi"
-                                /> */}
-                            </div>
-
                         </div>
                     </div>
                     <div className="col l-6">
                         <div className={clsx(styles.content)}>
-                            {/* <div className={clsx(styles.contentField)}>
-
-                                <i class="fas fa-transgender"></i>
-                                <select
-                                    value={trainerGender} id=""
-                                    onChange={(e) => {
-                                        trainerGender = e.target.value;
-                                        setTrainerGender(trainerGender)
-                                        console.log(trainerGender)
-                                    }}
-                                >
-                                    <option value="Nam">Nam</option>
-                                    <option value="Nữ">Nữ</option>
-                                </select>
-                            </div> */}
-
-                            {/* <div className={clsx(styles.contentField)}>
-                                
-                                <i class="fas fa-mobile"></i>
-                                <input
-                                    type="text"
-                                    className={clsx(styles.contentText)}
-                                    placeholder="Nhập số điện thoại"
-                                />
-                            </div> */}
-
-                            {/* <div className={clsx(styles.contentField)}>
-                                
-                                <i class="fas fa-text-height"></i>
-                                <input
-                                    type="text"
-                                    className={clsx(styles.contentText)}
-                                    placeholder="Nhập chiều cao"
-                                />
-                            </div> */}
-
-                            {/* <div className={clsx(styles.contentField)}>
-                                
-                                <i class="fas fa-weight"></i>
-                                <input
-                                    type="text"
-                                    className={clsx(styles.contentText)}
-                                    placeholder="Nhập cân nặng"
-                                />
-                            </div> */}
-
-
                             <div className={clsx(styles.contentField)}>
                                 
                                 <i class="fas fa-save"></i>
                                 <button
                                     onClick={() => {
-                                        handleAddtrainer();                                        
-                                        showPopup = true;
-                                        setShowPopup(showPopup);
-                                        
+                                        handleAddStudent();                                        
                                     }}
                                     className={clsx(styles.trainerAddBtn)}>
                                     Thêm học viên

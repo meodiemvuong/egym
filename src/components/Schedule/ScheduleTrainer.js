@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import TimeTable from 'react-timetable-events'
 // thoi khoa bieu cho student
-function Timetablee(id) {
+function ScheduleTrainer(id) {
     let [schedule, setSchedule] = useState([{
-        "dayOfWeek": 0,
+        "dayOfWeek": null,
         "start": "",
         "finish":"",
-        "scheduleId": null,
-        "trainerId": null,
-        "message":"",
+        "studentNames": [],
+        "timeId": null,
     }])
     
     
     
-    let url=`http://localhost:8080/cnpm/schedule-student/${id}`;  
+    
+    let url=`http://localhost:8080/cnpm/schedule-trainer/${id}`;  
     useEffect(() => {
 
-    fetch(url)
-        .then (response =>response.json())
-        .then (data => {
-            if(data.error[0]!=null){
-                console.log(data.error)
-                return ;
-            } else{
-            if(data.data[0].message){
-                console.log(data.data[0].message)
-                return
-            }
-            setSchedule(data.data); 
-            }}).catch(e=>console.log(e))   
-    },[]);
+        fetch(url)
+            .then (response =>response.json())
+            .then (data => {
+                // console.log(data)
+                if(data.error[0]!=null){
+                    console.log("loi roi bro")
+                    alert(data.error)
+                    return ;
+                } else if(data.data[0].message){
+                    alert(data.data[0].message)
+                }else{
+                console.log("lay du lieu")
+                setSchedule(data.data); 
+                }}).catch(e=>console.log(e))
+        },[]);
+    var arr = []
+    var t2=[], t3=[],t4=[],t5=[],t6=[], t7 =[], t8 =[]
+    // console.log(schedule)
     var event ={2:[],
         3:[],
         4:[],
@@ -37,20 +41,60 @@ function Timetablee(id) {
         6:[],
         7:[],
         8:[],};
-    
-        schedule.map((sche,index) => {
-        
-            let thu = sche.dayOfWeek
-            event = {...event,
-                [thu]: [{
-                    endTime: new Date(`2018-02-23T${schedule[index].finish}`),
-                    id: index+1,
-                    name: `ID Trainer ${schedule[index].trainerId} `,
-                    startTime: new Date(`2018-02-23T${schedule[index].start}`),
-                    type: 'error'
-                }],
-            }
+    schedule.map((sche,index) => {
+        arr.push({
+            date: sche.dayOfWeek,
+            endTime: new Date(`2018-02-23T${schedule[index].finish}`),
+            id: index+1,
+            name: `Student ${schedule[index].studentNames}` ,
+            startTime: new Date(`2018-02-23T${schedule[index].start}`),
+            type: 'error'
         })
+        
+        if(arr[index].date===2){
+            event = {...event,
+                2: t2 = t2.concat([arr[index]])
+            }
+        }
+        if(arr[index].date===3){
+            event = {...event,
+                3: t3 = t3.concat([arr[index]])
+            }
+        }
+        if(arr[index].date===4){
+            event = {...event,
+                4: t4 = t4.concat([arr[index]])
+            }
+        }
+        if(arr[index].date===5){
+            event = {...event,
+                5: t5 = t5.concat([arr[index]])
+            }
+        }
+        if(arr[index].date===6){
+            event = {...event,
+                6: t6 = t6.concat([arr[index]])
+            }
+        }
+        if(arr[index].date===7){
+            event = {...event,
+                7: t7 = t7.concat([arr[index]])
+            }
+        }
+        if(arr[index].date===8){
+            event = {...event,
+                8: t8 = t8.concat([arr[index]])
+            }
+        }
+    })
+    // console.log(event)
+    
+    
+    
+    
+    
+    
+    
     return (
         <div>
             
@@ -111,4 +155,4 @@ function Timetablee(id) {
     )
 }
 
-export default Timetablee
+export default ScheduleTrainer

@@ -57,19 +57,22 @@ function TrainerInfor(id) {
         (async () => {
             let response = await userProfileAPI.getProfile(id);
             console.log(response);
-            //console.log(response.data.data)
-            //let data = JSON.parse(response.data);
-            //console.log(typeof(data))
+            
             
             if (response && response.status && response.data.data) {
                 userProfile = { ...response.data.data[0] };
                 setUserProfile((userProfile));
-                //localStorage.removeItem('ID');
-               // console.log((userProfile.phone_number));
             }
         })()
     }, [])
-    //console.log(userProfile)
+    const handleUpdate = async () => {
+        setShowPopup(prev => !prev)
+        const response = await userProfileAPI.updateProfile(userProfile)
+        if(response && response.status) setShowPopup(prev => !prev);
+        if(response && response.data.error) {
+            alert(response.data.error)
+        }
+    }
 
     // Upload Avatar
 
@@ -95,22 +98,13 @@ function TrainerInfor(id) {
         // const response = await userProfileAPI.updateAvatar(data)
 
         setUserProfile(userProfile)
+        handleUpdate();
         console.log(file);
         //console.log(userProfile)
     }
 
 
-    //Update Profile
-    const handleUpdate = async () => {
-        
-        
-        setShowPopup(prev => !prev)
-        const response = await userProfileAPI.updateProfile(userProfile)
-        if(response && response.status) setShowPopup(prev => !prev);
-        if(response && response.data.error) {
-            alert(response.data.error)
-        }
-    }
+    
 
 
     return (

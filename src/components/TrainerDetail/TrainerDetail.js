@@ -1,10 +1,13 @@
 import React from 'react'
 import clsx from 'clsx'
-import { AdminHeader, CustomerItem, Schedule } from './../'
+import { AdminHeader,} from './../'
 import { useParams } from 'react-router-dom'
 
 import styles from './TrainerDetail.module.css'
 import TrainerInfor from '../TrainerInfor/TrainerInfor'
+import ScheduleTrainer from '../Schedule/ScheduleTrainer'
+import RequirementItem from '../RequirementItem/RequirementItem'
+import Period from '../Period/Period'
 
 function TrainerDetail({ admin }) {
     const id = useParams();
@@ -30,19 +33,18 @@ function TrainerDetail({ admin }) {
 
                 <section className={clsx(styles.contentField)}>
                     <h2 className={clsx(styles.heading)}>Lịch huấn luyện</h2>
-                    <Schedule />
+                    {ScheduleTrainer(ID)}
                 </section>
 
                 <section className={clsx(styles.contentField)}>
-                    <h2 className={clsx(styles.heading)}>Danh sách học viên</h2>
-                    {/* <div className="grid">
-                        <div className="row">
-                            <div className="col l-10 l-o-1"> */}
-                    {/* <CustomerItem /> */}
-                    
-                    {/* </div>
-                        </div>
-                    </div> */}
+                </section>
+                <section className={clsx(styles.contentField)}>
+                    <h2 className={clsx(styles.heading)}>Lịch tập</h2>
+                    {Period(ID)}
+                </section>
+                <section className={clsx(styles.contentField)}>
+                    <h2 className={clsx(styles.heading)}>Yêu cầu thêm hoặc sửa lịch tập</h2>
+                    {RequirementItem(ID)}
                 </section>
             </div>
         </div>

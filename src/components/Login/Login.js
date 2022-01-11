@@ -64,7 +64,7 @@ function Login() {
                     <div className="login-header">
                         <div className="login-header-logo">
                             <Link to='/'><img src={logo} alt="" className="logo-img" /></Link>
-                            <Link to='/' className="logo-name">RUBYGYM</Link>
+                            <Link to='/' className="logo-name">RubyGym</Link>
                         </div>
                     </div>
                 </div>
@@ -92,8 +92,8 @@ function Login() {
                                     Huấn luyện viên
                                 </div>
                                 <div
-                                    className={userState.role === "customer" ? "role-detail role-active" : "role-detail"}
-                                    onClick={() => setUserState({ ...userState, role: 'customer' })}
+                                    className={userState.role === "student" ? "role-detail role-active" : "role-detail"}
+                                    onClick={() => setUserState({ ...userState, role: 'student' })}
                                 >
                                     <i className="fas fa-user"></i>
                                     Học viên
