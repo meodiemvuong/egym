@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import './TrainerItem.css'
-
+import  avat from './../../store/imgs/trainer1.jpg'
 
 
 
@@ -28,7 +28,10 @@ function TrainerItem(name) {
                                     <Link to={`detail/${item.id}`} className="trainer-link" onClick={()=>{localStorage.setItem('IDT',item.id);console.log("hello")}} >
                                 
                                     <div className="col">
-                                    <div className="trainer-wrapper ">
+                                    <div className="trainer-wrapper " 
+                                    style={{
+                                    background:  `url(${item.avatar!==null?item.avatar:avat}) no-repeat center / cover`,
+                                    }} >
                                         
                                         <div className="trainer-infor" >
                                             <div className="trainer-name col">{item.name}</div>
@@ -42,7 +45,11 @@ function TrainerItem(name) {
                                     <Link to={`detail/${item.id}`} className="trainer-link" onClick={()=>{localStorage.setItem('IDT',item.id);console.log("hello")}} >
                                 
                                     <div className="col">
-                                    <div className="trainer-wrapper ">
+                                    <div className="trainer-wrapper "
+                                    style={{
+                                        background:  `url(${item.avatar!==null?item.avatar:avat}) no-repeat center / cover`,
+                                        }} 
+                                    >
                                         
                                         <div className="trainer-infor" >
                                             <div className="trainer-name col">{item.name}</div>

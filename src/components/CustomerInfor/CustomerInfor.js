@@ -99,13 +99,14 @@ function CustomerInfor(id) {
             method: 'POST',
             body: data
         })
-        const file = await response.json();
-        userProfile = {
-            ...userProfile,
-            avatar: file.secure_url
-        }
+        
+        // const file = await response.json();
+        // userProfile = {
+        //     ...userProfile,
+        //     avatar: file.secure_url
+        // }
         setUserProfile(userProfile)
-        console.log(file);
+        
         handleUpdate();
     }
 

@@ -44,7 +44,7 @@ function CustomerItem(name) {
                         style={{
                             height: '50px',
                             width: '50px',
-                            background: `url(${avatar})`
+                            background:  `url(${item.avatar!==null?item.avatar:avatar})`
                         }}
                         className={clsx(styles.avatarImg)}
                     >
@@ -92,7 +92,7 @@ function CustomerItem(name) {
                         style={{
                             height: '50px',
                             width: '50px',
-                            background: `url(${avatar})`
+                            background:  `url(${item.avatar!==null?item.avatar:avatar})`
                         }}
                         className={clsx(styles.avatarImg)}
                     >

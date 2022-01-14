@@ -20,7 +20,7 @@ function TrainerList() {
                             Tìm kiếm
                         </Link> */}
                         <div className={clsx(styles.optionBtn)}>
-                            <input  placeholder="Search for Trainer"
+                            <input  placeholder="Search for trainer"
                             onChange={(e) => {
                                 let name = e.target.value;
                                 setName(name)
