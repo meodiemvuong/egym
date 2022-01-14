@@ -53,6 +53,7 @@ function CustomerDetail({ admin }) {
     const handleAddservice = async(e)=>{
         setShowPopup(prev => !prev)
         var res = await addProfile.addService(mychoice);
+        
     }
     const [items, setItems] = useState([])
     const hadndleAddtrainerID = async(e)=>{
@@ -62,6 +63,7 @@ function CustomerDetail({ admin }) {
             student_id: parseInt(ID),
         }
         let response = Schedule.addTrainerId(JSON.stringify(params))
+        console.log(response)
         if(response.error===null){
             alert(`Bạn đã đăng kí với HLV thành công`)
         }
@@ -109,18 +111,13 @@ function CustomerDetail({ admin }) {
                 mychoice.service_id = sev.id
             }
         })
-        // console.log(stutra[0])
         var trainerID = null
         if(stutra[0]===undefined){
-            // console.log("Th nay")
+            
             trainerID = null
         } else {
-            // console.log("co Id")
             trainerID = stutra[0].trainer_id;
-        }
-        // trainerID = stutra[0].trainer_id;
-        
-        
+        }  
     return (
         
         <div className={clsx(styles.customerWrapper)}>
@@ -161,17 +158,15 @@ function CustomerDetail({ admin }) {
                                     
                                 </div>
                                 <div className={clsx(styles.contentField)}  >
-                                
-                                <i class="fas fa-save"></i>
                                 <button
                                     onClick={() => {
                                         let choice = window.confirm("bạn chắc kk")
                                         if(choice==true){
                                             handleAddservice(); 
+                                            window.location.reload();
                                         } else {
                                             return
-                                        }
-                                                                               
+                                        }                                             
                                     }}
                                     className={clsx(styles.trainerAddBtn)}>
                                     Thêm gói tập
@@ -208,8 +203,6 @@ function CustomerDetail({ admin }) {
                             )}
                             </div>
                             <div className={clsx(styles.contentField)}  >
-                                    
-                                    <i class="fas fa-save"></i>
                                     <button
                                         onClick={() => {
                                             hadndleAddtrainerID();                                        

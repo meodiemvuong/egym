@@ -8,7 +8,7 @@ import styles from './CustomerItem.module.css'
 
 //Từng học viên trong danh sách các học viên
 
-function CustomerItem() {
+function CustomerItem(name) {
     const [items, setItems] = useState([])
     const [account, setAccount] = useState([]
         
@@ -37,7 +37,55 @@ function CustomerItem() {
                         
                         
         <div to='/' className={clsx(styles.wrapper)}>
-            {  i ==index &&       
+        {   name=='' &&  i == index  &&
+            <Link to={`detail/${item.id}`} className={clsx(styles.content)}>
+                <div className={clsx(styles.avatarField)}>
+                    <div
+                        style={{
+                            height: '50px',
+                            width: '50px',
+                            background: `url(${avatar})`
+                        }}
+                        className={clsx(styles.avatarImg)}
+                    >
+                    </div>
+                    <div className={clsx(styles.name)}>{item.name}</div>
+                </div>
+
+                <div className={clsx(styles.inforField)}>
+                    {i===index && <div className={clsx(styles.inforContent, styles.status)}>{account[i].expire}</div>}
+                    
+                </div>
+
+                <div className={clsx(styles.inforField)}>
+                    <i class={clsx(styles.inforIcon, styles.gender, "fas fa-male")}></i>
+                    <div className={clsx(styles.inforContent)}>{item.sex}</div>
+                </div>
+
+                <div className={clsx(styles.inforField)}>
+                    <i
+                        class={clsx(styles.inforIcon, styles.birthday, "fas fa-birthday-cake")}
+                        style={{
+                            color: 'rgb(241, 122, 142)'
+                        }}
+                    ></i>
+                    <div className={clsx(styles.inforContent)}>{item.date_of_birth}</div>
+                </div>
+
+                <div className={clsx(styles.inforField)}>
+                    <i
+                        class={clsx(styles.inforIcon, styles.phone, "fas fa-mobile")}
+                        style={{
+                            color: 'rgb(184, 184, 58)'
+                        }}
+                    ></i>
+                    <div className={clsx(styles.inforContent)}>{item.phone_number}</div>
+                </div>
+
+
+            </Link>
+}
+            {  i == index && name!='' && item.name.toLowerCase().includes(name.toLowerCase())  &&
             <Link to={`detail/${item.id}`} className={clsx(styles.content)}>
                 <div className={clsx(styles.avatarField)}>
                     <div

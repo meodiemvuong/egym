@@ -2,9 +2,21 @@ import axiosClient from "./axiosClient";
 
 const Schedule = {
     
-    
+    changeContent: async(params)=>{
+        try{
+            let url = `http://localhost:8080/cnpm/period-trainer/${params.id}`;
+            console.log(JSON.stringify(params))
+            //post lần 1 để lấy thông tin id được khởi tạo                       
+            let response = await axiosClient.put(url,JSON.stringify(params));
+            
+            return response.data;
+        } catch(err){
+            alert(err.message);
+        }
+    },
     addTrainerId: async(params)=>{
         try{
+            console.log(params)
             let url = 'http://localhost:8080/cnpm/trainer-student';
             //post lần 1 để lấy thông tin id được khởi tạo                       
             let response = await axiosClient.post(url,params);

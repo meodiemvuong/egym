@@ -35,7 +35,7 @@ function AddCustomer() {
         } else {alert("Mật khẩu không khớp, vui lòng thử lại"); return}
             
     }
-
+    console.log(params)
     return (
         <div className={clsx(styles.wrapper)}>
             <AdminHeader heading="Thêm huấn luyện viên" />
@@ -90,6 +90,10 @@ function AddCustomer() {
                                     type="password"
                                     className={clsx(styles.contentText)}
                                     placeholder="Xác nhận mật khẩu"
+                                    onChange={(e) => {
+                                        const confirmPassword = e.target.value;
+                                        setUserState({ ...userState, confirmPassword });
+                                    }}
                                 />
                             </div>
                         </div>

@@ -94,17 +94,15 @@ function CustomerInfor(id) {
         
         const files = e.target.files;
         const data = new FormData();
-        data.append('file', files[0]);
-        data.append('upload_preset', 'rubygymimages');
-
-        const response = await fetch('https://api.cloudinary.com/v1_1/dzgdwey0f/image/upload', {
+        data.append('avatar', files[0]);
+        const response = await fetch(`http://localhost:8080/cnpm/avatar-student/${id}`, {
             method: 'POST',
             body: data
         })
         const file = await response.json();
         userProfile = {
             ...userProfile,
-            avatar: 'file.secure_url'
+            avatar: file.secure_url
         }
         setUserProfile(userProfile)
         console.log(file);

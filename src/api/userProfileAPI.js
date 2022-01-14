@@ -39,8 +39,6 @@ const userProfileAPI = {
         } catch(e){
             alert(e.message);
         }
-
-
     },
     getAccount: async(id)=>{
         let url =`/account-student?id=${id}`

@@ -54,7 +54,6 @@ function Period(id) {
             
             {localStorage.getItem('role')!=="trainer"&&
             <div>
-            <h5 className="heading1">Thêm lịch tập</h5>
             <button className='trainerAddBtn'
             onClick={()=>{
                 handleClick1();
@@ -81,7 +80,7 @@ function Period(id) {
         <tr>
         <td>{sche.dayOfWeek}</td>
         <td>{sche.start}-{sche.finish}</td>		
-        {localStorage.getItem('role')==="trainer"&&<td>{sche.studentNames}</td>}
+        {localStorage.getItem('role')==="trainer"&&<td>{sche.studentNames+" "}</td>}
         {localStorage.getItem('role')!=="trainer"&&<td>
         
         

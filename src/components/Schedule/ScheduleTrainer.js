@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TimeTable from 'react-timetable-events'
+import Schedule from '../../api/Schedule'
 // thoi khoa bieu cho student
 function ScheduleTrainer(id) {
     let [schedule, setSchedule] = useState([{
@@ -9,9 +10,20 @@ function ScheduleTrainer(id) {
         "studentNames": [],
         "timeId": null,
     }])
-    
-    
-    
+    let [params, setParams]=useState({
+        id: parseInt(id),
+        content:null,
+        note:"",
+        periodId: null,
+    })
+    let [content,setContent]=useState(null)
+    const handleContent = async(e)=>{
+        console.log("click it")
+        let res = await Schedule.changeContent(params)
+        window.location.reload()
+        console.log(res)
+        // var res = await addProfile.addService(mychoice);
+    }
     
     let url=`http://localhost:8080/cnpm/schedule-trainer/${id}`;  
     useEffect(() => {
@@ -22,10 +34,10 @@ function ScheduleTrainer(id) {
                 // console.log(data)
                 if(data.error[0]!=null){
                     console.log("loi roi bro")
-                    alert(data.error)
+                    // alert(data.error)
                     return ;
                 } else if(data.data[0].message){
-                    alert(data.data[0].message)
+                    // alert(data.data[0].message)
                 }else{
                 console.log("lay du lieu")
                 setSchedule(data.data); 
@@ -34,73 +46,74 @@ function ScheduleTrainer(id) {
     var arr = []
     var t2=[], t3=[],t4=[],t5=[],t6=[], t7 =[], t8 =[]
     // console.log(schedule)
-    var event ={2:[],
-        3:[],
-        4:[],
-        5:[],
-        6:[],
-        7:[],
-        8:[],};
-    schedule.map((sche,index) => {
-        arr.push({
-            date: sche.dayOfWeek,
-            endTime: new Date(`2018-02-23T${schedule[index].finish}`),
-            id: index+1,
-            name: `Student ${schedule[index].studentNames}` ,
-            startTime: new Date(`2018-02-23T${schedule[index].start}`),
-            type: 'error'
-        })
-        
-        if(arr[index].date===2){
-            event = {...event,
-                2: t2 = t2.concat([arr[index]])
-            }
-        }
-        if(arr[index].date===3){
-            event = {...event,
-                3: t3 = t3.concat([arr[index]])
-            }
-        }
-        if(arr[index].date===4){
-            event = {...event,
-                4: t4 = t4.concat([arr[index]])
-            }
-        }
-        if(arr[index].date===5){
-            event = {...event,
-                5: t5 = t5.concat([arr[index]])
-            }
-        }
-        if(arr[index].date===6){
-            event = {...event,
-                6: t6 = t6.concat([arr[index]])
-            }
-        }
-        if(arr[index].date===7){
-            event = {...event,
-                7: t7 = t7.concat([arr[index]])
-            }
-        }
-        if(arr[index].date===8){
-            event = {...event,
-                8: t8 = t8.concat([arr[index]])
-            }
-        }
-    })
-    // console.log(event)
+    var event ={"Thứ 2":[],
+        "Thứ 3":[],
+        "Thứ 4":[],
+        "Thứ 5":[],
+        "Thứ 6":[],
+        "Thứ 7":[],
+        "Chủ nhật":[],};
     
-    
-    
-    
-    
-    
-    
+    // console.log(arr)
     return (
         <div>
-            
+            {
+                schedule.map((sche,index) => {
+                    arr.push({
+                        date: sche.dayOfWeek,
+                        endTime: new Date(`2018-02-23T${schedule[index].finish}`),
+                        id: index+1,
+                        name: `${schedule[index].studentNames}`,
+                        startTime: new Date(`2018-02-23T${schedule[index].start}`),
+                        type: 'error',
+                        periodId: sche.periodId
+                    })
+                    
+                    if(arr[index].date===2){
+                        event = {...event,
+                            "Thứ 2": t2 = t2.concat([arr[index]])
+                        }
+                    }
+                    if(arr[index].date===3){
+                        event = {...event,
+                            "Thứ 3": t3 = t3.concat([arr[index]])
+                        }
+                    }
+                    if(arr[index].date===4){
+                        event = {...event,
+                            "Thứ 4": t4 = t4.concat([arr[index]])
+                        }
+                    }
+                    if(arr[index].date===5){
+                        event = {...event,
+                            "Thứ 5": t5 = t5.concat([arr[index]])
+                        }
+                    }
+                    if(arr[index].date===6){
+                        event = {...event,
+                            "Thứ 6": t6 = t6.concat([arr[index]])
+                        }
+                    }
+                    if(arr[index].date===7){
+                        event = {...event,
+                            "Thứ 7": t7 = t7.concat([arr[index]])
+                        }
+                    }
+                    if(arr[index].date===8){
+                        event = {...event,
+                            "Chủ nhật": t8 = t8.concat([arr[index]])
+                        }
+                    }
+                })
+            }
             <div className=''>
                     
-                    
+            {params.content && <button
+                        className='trainerAddBtn'
+                        onClick={()=>{
+                            handleContent();
+                        }}
+                        >Lưu</button>}       
             <TimeTable 
             
             events={{...event}}
@@ -125,7 +138,26 @@ function ScheduleTrainer(id) {
                                 fontSize: '15px'
                             }}
                         >
-                            {event.name}
+                        {event.name}
+                        
+                        {/* {console.log(event)} */}
+                        {/* { <button
+                            style={{
+                                
+                                fontSize: '15px'
+                            }}
+                            className='trainerAddBtn'
+                            onClick={()=>{
+                            var cont = prompt(`Content mới`,'');
+                            setContent(cont)
+                            setParams({...params,content:cont,periodId: event.periodId })
+                        if(content != null)  {
+                            // console.log(params)
+                            
+                        } 
+                        }}
+                        >{params.content==null?event.name:params.content}</button>}
+                         */}
                         </span>
                     </div>
                 );
