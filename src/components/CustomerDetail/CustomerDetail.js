@@ -11,13 +11,20 @@ import Schedule from './../../api/Schedule'
 import  avat from './../../store/imgs/trainer1.jpg'
 import RequirementItem from '../RequirementItem/RequirementItem';
 import Period from '../Period/Period';
-import axiosClient from '../../api/axiosClient';
 // Trang này ở trong trang admin
 // CustomerDetail sẽ gồm Header + CustomerInfor
 
 function CustomerDetail({ admin }) {
     const id = useParams();
-    
+    var ID ;
+    if(id.id && localStorage.getItem('ID')==null){
+        ID = id.id;
+    } else if(localStorage.getItem('ID')!=null){
+        ID = localStorage.getItem('ID');
+    }
+    else {
+        ID = localStorage.getItem('IDS');
+    }
     let [showPopup, setShowPopup] = useState(false);
     useEffect(() => {
         if (showPopup) {
@@ -35,17 +42,6 @@ function CustomerDetail({ admin }) {
         id: null,
         category: ""
     }])
-    
-    var ID ;
-    if(id.id && localStorage.getItem('ID')==null){
-        ID = id.id;
-    } else if(localStorage.getItem('ID')!=null){
-        ID = localStorage.getItem('ID');
-    }
-    else {
-        ID = localStorage.getItem('IDS');
-    }
-    
     let [mychoice,setMychoice] = useState({
         category: "",
         id: parseInt(ID),
@@ -65,9 +61,10 @@ function CustomerDetail({ admin }) {
         }
         let response = Schedule.addTrainerId(JSON.stringify(params))
         console.log(response)
-        if(response.error===null){
-            alert(`Bạn đã đăng kí với HLV thành công`)
-        }
+        // if(response.error===null){
+        //     alert(`Bạn đã đăng kí với HLV thành công`)
+        // }
+        window.location.reload();
     }
     var trainerID = null
     let [stutra, setStutra]= useState([
@@ -90,6 +87,14 @@ function CustomerDetail({ admin }) {
         .then (response =>response.json())
         .then (data => setItems(data.data))
     },[]);
+    let [account, setAccount] = useState({})
+    useEffect(() => {
+        let url=`http://localhost:8080/cnpm/account-student?id=${ID}`;
+        fetch(url)
+            .then (response =>response.json())
+            .then (data => {setAccount(data.data[0])})
+        },[]);
+        
     useEffect(() => {
         let url=`http://localhost:8080/cnpm/service`; 
         fetch(url)
@@ -98,7 +103,7 @@ function CustomerDetail({ admin }) {
                 //console.log(data)
                 if(data.error!="null"){
                     console.log("loi roi bro")
-                    alert(data.error)
+                    console.log(data.error)
                     return ;
                 } else{
                 console.log("lay du lieu")
@@ -118,7 +123,6 @@ function CustomerDetail({ admin }) {
         } else {
             trainerID = stutra[0].trainer_id;
         }
-        console.log(stutra[0]) 
     return (
         
         <div className={clsx(styles.customerWrapper)}>
@@ -184,8 +188,11 @@ function CustomerDetail({ admin }) {
                         </div>
                     </div>
                     
-                }    
-                <div>
+                }
+                {
+                    account.service_id >=4 && account.service_id != undefined && 
+                    <div>
+                        <div>
                         {!trainerID && 
                             <div>
                                 
@@ -227,7 +234,7 @@ function CustomerDetail({ admin }) {
                                 </div>               
                             </div>
                                 
-                            </div>}
+                        </div>}
                         {items.map((item,index)=>{
                             return(
                             <div>
@@ -260,27 +267,46 @@ function CustomerDetail({ admin }) {
                         }
                             </div>)
                         })}
+                        
                 </div>
-                </section>
-            </div>
-                <section className={clsx(styles.contentField)}>
+                </div>
+                
+                }
+                { 
+                    (account.service_id <4   || account.service_id == undefined) &&
+                    <div>
+                        <div className={clsx(styles.inforContent)} >
+                            <h2 className={clsx(styles.heading)}>Gói tập của bạn không được phép tập cùng HLV</h2>
+                        </div>
+                    </div>
+                }
+                {   (true)
+                    &&
+                    <div>
+                    <section className={clsx(styles.contentField)}>
                     <h2 className={clsx(styles.heading)}>Lịch tập luyện</h2>
                     {Timetablee(ID)}
                     
                 </section>
-            </div>
-            <section className={clsx(styles.contentField)}>
+                <section className={clsx(styles.contentField)}>
                     <h2 className={clsx(styles.heading)}>Lịch tập</h2>
                     {Period(ID)}
                     
                 </section>
-            <div>
+                <div>
                 <section className={clsx(styles.contentField)}>
                     <h2 className={clsx(styles.heading)}>Yêu cầu của bạn</h2>
                     {RequirementItem(ID)}
                     
                 </section>
+                </div>
+                </div>
+                }
+                </section>
             </div>
+                
+            </div>
+            
             
             <div>
             </div>

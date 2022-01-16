@@ -26,14 +26,9 @@ const authAPI = {
             if(JSON.parse(params).role==='student'){
                 url='/authentication-student';
             } 
-            
-            
             let response = await axiosClient.post(url,params);
             console.log(response.data);
             localStorage.setItem('ID', JSON.stringify(response.data.data[0].id))
-            
-            //localStorage.setItem('account', JSON.stringify(response.data.data[0]));
-            //console.log(localStorage.getItem('account'));
             store.dispatch(Actions.saveUserToRedux(localStorage.getItem('token')));                                 
             //console.log("dang nhap oke");
             return response;
@@ -42,19 +37,6 @@ const authAPI = {
             alert(err.message)
         }
     },
-
-    logout: async () => {
-        try {
-            const url = '/auth/logout'
-            //const response = await axiosClient.post(url);
-            //localStorage.removeItem('account');
-            //localStorage.removeItem('ID');
-            store.dispatch(Actions.removeUserOutOfRedux(null))
-        } catch (err) {
-            alert(err.message);
-        }
-
-    }
 }
 
 export default authAPI;

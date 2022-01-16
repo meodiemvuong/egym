@@ -37,10 +37,10 @@ function Period(id) {
                 // console.log(data)
                 if(data.error[0]!=null){
                     console.log("loi roi bro")
-                    alert(data.error)
+                    console.log(data.error)
                     return ;
                 } else if(data.data[0].message){
-                    alert(data.data[0].message)
+                    console.log(data.data[0].message)
                 }else{
                 console.log("lay du lieu")
                 setSchedule(data.data); 

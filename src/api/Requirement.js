@@ -1,10 +1,5 @@
 import axiosClient from "./axiosClient";
 const RequirementAPI = {
-    // Accept: async(params) =>{
-    //     let url = `http://localhost:8080/cnpm/requirement-trainer/${params.id}`
-    //     let response = await axiosClient.delete(url,{data: JSON.stringify(params)});
-    //     return response;
-    // },
     Accept: async(params)=>{
         try{
             console.log(params)

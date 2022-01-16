@@ -44,12 +44,8 @@ const userProfileAPI = {
         let url =`/account-student?id=${id}`
         try{
             const response = await axiosClient.get(url);
-            //console.log(response)
             if(response.data.error=='null'){
-                //console.log("Cap nhat thanh cong");
-                // console.log(response)
             } else {
-                //console.log("Khong thanh cong");
             }
             return response;
         } catch(e){

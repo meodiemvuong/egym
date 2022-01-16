@@ -100,14 +100,9 @@ function CustomerInfor(id) {
             body: data
         })
         
-        // const file = await response.json();
-        // userProfile = {
-        //     ...userProfile,
-        //     avatar: file.secure_url
-        // }
-        // setUserProfile(userProfile)
-        
-        // handleUpdate();
+        if(response){
+            window.location.reload()
+        }
     }
 
     return (
