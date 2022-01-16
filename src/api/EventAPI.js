@@ -41,7 +41,18 @@ const getEvent = {
             
         }
 
-    }
+    },
+    addReview: async(params)=>{
+        try{
+            let url = `http://localhost:8080/cnpm/review-student/${params.id}`;
+            //post lần 1 để lấy thông tin id được khởi tạo                       
+            let response = await axiosClient.post(url,JSON.stringify(params));
+            
+            return response.data;
+        } catch(err){
+            alert(err.message);
+        }
+    },
     
 
     

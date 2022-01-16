@@ -14,12 +14,6 @@ const addProfile = {
             //post lần 2 để tạo thông tin account trainer id
             let responseID = await axiosClient.post(url,params);
             console.log(responseID);
-            
-            
-            //localStorage.setItem('account', JSON.stringify(response.data.data[0]));
-            //console.log(localStorage.getItem('account'));
-            //store.dispatch(Actions.saveUserToRedux(localStorage.getItem('token')));                                 
-            //console.log("dang nhap oke");
             return response;
         } catch (err) {
             //console.log("khong oke");
@@ -38,12 +32,6 @@ const addProfile = {
             //post lần 2 để tạo thông tin account student id
             let responseID = await axiosClient.post(url,params);
             console.log(responseID);
-            
-            
-            //localStorage.setItem('account', JSON.stringify(response.data.data[0]));
-            //console.log(localStorage.getItem('account'));
-            //store.dispatch(Actions.saveUserToRedux(localStorage.getItem('token')));                                 
-            //console.log("dang nhap oke");
             return response;
 
         } catch(err){

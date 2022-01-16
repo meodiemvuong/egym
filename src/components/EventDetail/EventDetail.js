@@ -37,7 +37,6 @@ function EventDetail({ admin }) {
     // sua su kien
     const handleUpdate = async () => {
         console.log("click update")
-        setShowPopup(prev => !prev)
         const response = await  getEvent.updateEvent(params)
         if(response && response.status) setShowPopup(prev => !prev);
         if(response && response.data.error) {
@@ -103,7 +102,7 @@ function EventDetail({ admin }) {
                                         readOnly={!expireUpdating}
                                         ref={expireRef}
                                         type="date"
-                                        className={clsx(styles.inforText)}
+                                        className={clsx(styles.contentText)}
                                         value={item.expire}
                                         onChange={(e) => {
                                             setItems(prev => ({
@@ -165,7 +164,7 @@ function EventDetail({ admin }) {
                                         readOnly={!titleUpdating}
                                         ref={titleRef}
                                         type="text"
-                                        className={clsx(styles.inforText)}
+                                        className={clsx(styles.contentText)}
                                         value={item.title}
                                         onChange={(e) => {
                                             setItems(prev => ({
@@ -226,7 +225,7 @@ function EventDetail({ admin }) {
                                         readOnly={!descriptionUpdating}
                                         ref={descriptionRef}
                                         type="text"
-                                        className={clsx(styles.inforText)}
+                                        className={clsx(styles.contentText)}
                                         value={item.description}
                                         onChange={(e) => {
                                             setItems(prev => ({
@@ -238,7 +237,8 @@ function EventDetail({ admin }) {
                                 </div>
                                 {
                                     !descriptionUpdating &&
-                                    <label
+                                    <div>
+                                        <label
                                         htmlFor='trainer-name'
                                         className={clsx(styles.inforBtn)}
                                         onClick={() => {
@@ -249,6 +249,7 @@ function EventDetail({ admin }) {
                                         <i class="fas fa-pen"></i>
                                         Chỉnh sửa
                                     </label>
+                                    </div>
                                 }
                                 {
                                     descriptionUpdating &&

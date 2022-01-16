@@ -38,6 +38,10 @@ function Category() {
                     <i className={clsx(styles.categoryIcon, "fas fa-calendar-week")}></i>
                     <Link className={clsx(styles.itemLink)} to="events">Sự kiện</Link>
                 </li>
+                <li className={clsx(styles.categoryItem)}>
+                    <i className={clsx(styles.categoryIcon, "fas fa-calendar-week")}></i>
+                    <Link className={clsx(styles.itemLink)} to="review">Góp ý</Link>
+                </li>
             </ul>
         </div>
     )

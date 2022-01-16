@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Admin, Footer } from './../components'
+import { Admin,} from './../components'
 import { useNavigate } from 'react-router-dom'
 
 function AdminPage() {
@@ -9,7 +9,9 @@ function AdminPage() {
     }, [])
     return (
         <>
+            
             <Admin />
+            
             
         </>
     )

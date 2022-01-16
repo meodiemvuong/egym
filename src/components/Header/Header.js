@@ -42,7 +42,7 @@ function Header() {
                             <ul className="nav-list">
                                 <li className="nav-item"><NavLink to="/">Trang chủ</NavLink></li>
                                 <li className="nav-item"><NavLink to="/event">Sự kiện</NavLink></li>
-                                {/* <li className="nav-item"><NavLink to="/">Góp ý - Phản hồi</NavLink></li> */}
+                                <li className="nav-item"><NavLink to="/review">Góp ý - Phản hồi</NavLink></li>
                             </ul>
                         </nav>
                     </div>

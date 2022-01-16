@@ -8,6 +8,8 @@ import styles from './Admin.module.css'
 import EventDetail from '../EventDetail/EventDetail'
 import AddEvent from '../AddEvent/AddEvent'
 import EventList from '../EventList/EventList'
+import ReviewPage from '../../pages/ReviewPage'
+import ReadReview from '../ReadReview/ReadReview'
 // Trang admin
 
 function Admin() {
@@ -29,6 +31,7 @@ function Admin() {
                     <Route path="events" element={<EventList admin={true}/>} />
                     <Route path="events/add" element={<AddEvent admin={true} />} />
                     <Route path="events/detail/:id" element={<EventDetail admin={true}/>} />
+                    <Route path="review" element={<ReadReview admin={true}/>} />
                 </Routes>
             </main >
         </div >

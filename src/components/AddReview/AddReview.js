@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import { useEffect } from 'react'
-import styles from './AddEvent.module.css'
+import styles from './AddReview.module.css'
 import { Popup } from './../'
 import { useNavigate } from "react-router-dom";
 import getEvent from '../../api/EventAPI';
@@ -9,12 +9,13 @@ import AdminHeader from '../AdminHeader/AdminHeader'
 
 // Trang thêm huấn luyện viên
 
-function AddEvent({admin}) {
+function AddReview(id) {
     let [userState, setUserState] = useState({});  
     let params = {
-        "title": userState.title,
-        "description": userState.description,
-        "expire": userState.expire,
+        "id": localStorage.getItem('ID'),
+        "rate": userState.rate,
+        "review": userState.review,
+        "date": '2022-01-14',
         // "category": userState.category,
     }
     const navigate = useNavigate();
@@ -29,15 +30,22 @@ function AddEvent({admin}) {
             clearTimeout(id1);
         }
     }, [showPopup])
-    const handleAddEvent = async(e)=>{
-        setShowPopup(prev => !prev)
-        const response = await getEvent.addEvent(JSON.stringify(params));
-        
+    const handleAddReview = async(e)=>{
+        console.log(params)
+        // setShowPopup(prev => !prev)
+        const response = await getEvent.addReview(params);
+        if(response.error[0]){
+            alert(response.error[0])
+        }
+        else{
+        alert(response.data[0])
+        window.location.reload();
+        }
     }
     return (
         
         <div className="container_newfeed">
-            {admin && <AdminHeader heading="Thông tin phản hồi" />}
+            
         <div className="page_top"></div>
         <div className="newfeed">
             <div className="page-link">
@@ -47,7 +55,7 @@ function AddEvent({admin}) {
              {
                 <h1 className="header_title">
                       
-                    BÀI VIẾT MỚI</h1>
+                    Đánh giá chúng tôi</h1>
              }
         </div>
         
@@ -63,52 +71,70 @@ function AddEvent({admin}) {
                                 <div className="red-dot"> Tin tức &amp; Sự kiện</div>
                                 
                                 <div className={clsx(styles.inforContent)}>
-                                    <h3 className={clsx(styles.inforLabel)}>Kết thúc</h3>
+                                    <h3 className={clsx(styles.inforLabel)}>Thời gian</h3>
                                     <input
                                         className={clsx(styles.contentText)}
                                         type="date"
                                         name = 'expire'
                                         id = 'expire'
                                         onChange={(e)=>{
-                                            const expire = e.target.value.toString()
-                                            setUserState({ ...userState, expire });
+                                            const date = e.target.value.toString()
+                                            setUserState({ ...userState, date });
                                         }                                           
                                         }
                                     />
                                 </div>
                                 <div className={clsx(styles.inforContent)}>
-                                    <h3 className={clsx(styles.inforLabel)}>Tiêu đề</h3>
+                                    <h3 className={clsx(styles.inforLabel)}>Đánh giá</h3>
                                     <input
                                       className={clsx(styles.contentText)}
                                       type="text"
-                                      name = "title"
+                                      name = 'title'
                                       id = 'title'
                                       onChange={(e)=>{
-                                          const title = e.target.value
-                                          setUserState({ ...userState, title });
+                                          const review = e.target.value
+                                          setUserState({ ...userState, review });
                                       }                                           
                                       }  
-                                    ></input>
+                                    />
                                 </div>
                                 
                                 <div className={clsx(styles.inforContent)}>
-                                    <h3 className={clsx(styles.inforLabel)}>Mô tả</h3>
-                                <input
+                                    <h3 className={clsx(styles.inforLabel)}>Số sao</h3>
+                                    <select
+                                        className={clsx(styles.contentText)}
+                                        type="number"
+                                        name = 'description'
+                                        id = 'description'
+                                        onChange={(e)=>{
+                                            const rate = parseInt(e.target.value)
+                                            setUserState({ ...userState, rate });
+                                        }                                           
+                                        }
+                                    >
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        
+                                    </select>
+                                {/* <input
                                     className={clsx(styles.contentText)}
-                                    type="text"
+                                    type="number"
                                     name = 'description'
                                     id = 'description'
                                     onChange={(e)=>{
-                                        const description = e.target.value
-                                        setUserState({ ...userState, description });
+                                        const rate = parseInt(e.target.value)
+                                        setUserState({ ...userState, rate });
                                     }                                           
                                     }
-                                    />
+                                    /> */}
                             </div>
                             <div className={clsx(styles.contentField)}>
                                 <button
                                     onClick={() => {
-                                        handleAddEvent();  
+                                        handleAddReview();  
                                     }}
                                     className={clsx(styles.trainerAddBtn)}>
                                     Thêm Sự kiện
@@ -129,4 +155,4 @@ function AddEvent({admin}) {
             
     )
 }
-export default AddEvent
+export default AddReview

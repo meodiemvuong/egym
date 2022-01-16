@@ -6,6 +6,8 @@ import AdminPage from './pages/AdminPage';
 import TrainerPage from './pages/TrainerPage';
 import CustomerPage from './pages/CustomerPage';
 import EventPage from './pages/EventPage'
+import ReviewPage from './pages/ReviewPage';
+import AddReviewPage from './pages/AddReviewPage';
 
 
 const routes = [
@@ -32,6 +34,14 @@ const routes = [
     {
         path: '/event',
         element: <EventPage/>
+    },
+    {
+        path: '/review',
+        element: <ReviewPage/>
+    },
+    {
+        path: '/review/add',
+        element: <AddReviewPage/>
     },
     {
         path: '*',
