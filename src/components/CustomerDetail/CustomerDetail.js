@@ -75,22 +75,7 @@ function CustomerDetail({ admin }) {
             trainer_id:null
         }
     ])
-    // const handleContent = async(e)=>{
-    //     let url=`http://localhost:8080/cnpm/trainer-student?studentId=${ID}`
-    //     console.log("click it")
-    //     let res = await Schedule.getTrainerStudent(url)
-    //     res.json()
-    //     console.log(res)
-    //     // var res = await addProfile.addService(mychoice);
-    // }
-    // useEffect(() => {
-    //     let url=`http://localhost:8080/cnpm/trainer-student?studentId=${ID}`
-    //     console.log("click it")
-    //     let res =  Schedule.getTrainerStudent(url)
-    //     console.log(res)
-        
-        
-    //     },[]);
+    
         
     useEffect(() => {
         let url=`http://localhost:8080/cnpm/trainer-student?studentId=${ID}`
@@ -128,12 +113,12 @@ function CustomerDetail({ admin }) {
             }
         })
         
-        if(stutra[0].trainer_id === null){
+        if(stutra[0] === undefined){
             trainerID = null;
         } else {
             trainerID = stutra[0].trainer_id;
         }
-        console.log(stutra) 
+        console.log(stutra[0]) 
     return (
         
         <div className={clsx(styles.customerWrapper)}>
