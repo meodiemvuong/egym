@@ -70,6 +70,15 @@ const Schedule = {
             alert(err.message);
         }
     },
+    getTrainerStudent: async(url)=>{
+        try{              
+            let response = await axiosClient.get(url);
+            console.log((response.data))
+            return response.data;
+        } catch(err){
+            alert(err.message);
+        }
+    }
     
 
     

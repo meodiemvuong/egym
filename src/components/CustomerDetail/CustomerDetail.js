@@ -8,9 +8,10 @@ import Timetablee from '../Schedule/Schedule';
 import { Popup } from './../'
 import addProfile from '../../api/addProfile';
 import Schedule from './../../api/Schedule'
-import Requirement from '../Requirement/Requirement';
+import  avat from './../../store/imgs/trainer1.jpg'
 import RequirementItem from '../RequirementItem/RequirementItem';
 import Period from '../Period/Period';
+import axiosClient from '../../api/axiosClient';
 // Trang này ở trong trang admin
 // CustomerDetail sẽ gồm Header + CustomerInfor
 
@@ -34,7 +35,7 @@ function CustomerDetail({ admin }) {
         id: null,
         category: ""
     }])
-    let url=`http://localhost:8080/cnpm/service`; 
+    
     var ID ;
     if(id.id && localStorage.getItem('ID')==null){
         ID = id.id;
@@ -68,21 +69,36 @@ function CustomerDetail({ admin }) {
             alert(`Bạn đã đăng kí với HLV thành công`)
         }
     }
-    
+    var trainerID = null
     let [stutra, setStutra]= useState([
         {
-            trainer_id: null
-        },
+            trainer_id:null
+        }
     ])
+    // const handleContent = async(e)=>{
+    //     let url=`http://localhost:8080/cnpm/trainer-student?studentId=${ID}`
+    //     console.log("click it")
+    //     let res = await Schedule.getTrainerStudent(url)
+    //     res.json()
+    //     console.log(res)
+    //     // var res = await addProfile.addService(mychoice);
+    // }
+    // useEffect(() => {
+    //     let url=`http://localhost:8080/cnpm/trainer-student?studentId=${ID}`
+    //     console.log("click it")
+    //     let res =  Schedule.getTrainerStudent(url)
+    //     console.log(res)
+        
+        
+    //     },[]);
+        
     useEffect(() => {
-        let url=`http://localhost:8080/cnpm/trainer-student?studentId=${ID}`;
+        let url=`http://localhost:8080/cnpm/trainer-student?studentId=${ID}`
         fetch(url)
             .then (response =>response.json())
-            .then (data => {
-            
-            setStutra(data.data)
-        })
+            .then (data => setStutra(data.data))
         },[]);
+
     useEffect(() => {
     let url=`http://localhost:8080/cnpm/trainer`;
     fetch(url)
@@ -90,7 +106,7 @@ function CustomerDetail({ admin }) {
         .then (data => setItems(data.data))
     },[]);
     useEffect(() => {
-
+        let url=`http://localhost:8080/cnpm/service`; 
         fetch(url)
             .then (response =>response.json())
             .then (data => {
@@ -111,13 +127,13 @@ function CustomerDetail({ admin }) {
                 mychoice.service_id = sev.id
             }
         })
-        var trainerID = null
-        if(stutra[0]===undefined){
-            
-            trainerID = null
+        
+        if(stutra[0].trainer_id === null){
+            trainerID = null;
         } else {
             trainerID = stutra[0].trainer_id;
-        }  
+        }
+        console.log(stutra) 
     return (
         
         <div className={clsx(styles.customerWrapper)}>
@@ -175,7 +191,17 @@ function CustomerDetail({ admin }) {
                         <div className='' >
                         
                         <div>
-                            {!trainerID && 
+                            
+
+                        </div>               
+                        </div>
+                            <Popup trigger={showPopup} message="Thêm thành công" />
+                        </div>
+                    </div>
+                    
+                }    
+                <div>
+                        {!trainerID && 
                             <div>
                                 
                                     <div className={clsx(styles.inforContent)} >
@@ -189,7 +215,10 @@ function CustomerDetail({ admin }) {
                                     <div className="trainer-link" onClick={()=>{localStorage.setItem('IDT',item.id); }}>
                                     
                                         <div className="col">
-                                        <div className="trainer-wrapper ">
+                                        <div className="trainer-wrapper "
+                                            style={{
+                                            background: `url(${item.avatar!==null?item.avatar:avat}) no-repeat center / cover`,
+                                            }} >
                                             
                                             <div className="trainer-infor" >
                                                 <div className="trainer-name col">{item.name}</div>
@@ -217,7 +246,7 @@ function CustomerDetail({ admin }) {
                         {items.map((item,index)=>{
                             return(
                             <div>
-                                {trainerID===item.id && items[trainerID-1] &&
+                                {trainerID===item.id &&
                             
                             <div>
                                 <div className={clsx(styles.inforContent)} >
@@ -227,7 +256,10 @@ function CustomerDetail({ admin }) {
                                 <div className="trainer-link">
                                 
                                     <div className="col">
-                                    <div className="trainer-wrapper ">
+                                    <div className="trainer-wrapper "
+                                        style={{
+                                        background: `url(${item.avatar!==null?item.avatar:avat}) no-repeat center / cover`,
+                                        }}>
                                         
                                         <div className="trainer-infor" >
                                             <div className="trainer-name col">{item.name}</div>
@@ -243,14 +275,7 @@ function CustomerDetail({ admin }) {
                         }
                             </div>)
                         })}
-
-                        </div>               
-                        </div>
-                            <Popup trigger={showPopup} message="Thêm thành công" />
-                            </div>
-                    </div>
-                    
-                }    
+                </div>
                 </section>
             </div>
                 <section className={clsx(styles.contentField)}>

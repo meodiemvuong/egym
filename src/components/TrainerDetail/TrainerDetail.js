@@ -70,17 +70,19 @@ function TrainerDetail({ admin }) {
                     <table id="t01" >
         <tbody><tr>
           <th>Số thứ tự</th>
-          <th>StudentId</th>
-          {localStorage.getItem('role')==="trainer"&&<th>Route</th>}		
-          {localStorage.getItem('role')==="trainer"&&<th>Comment</th>}
+          <th>Tên học viên</th>
+          {localStorage.getItem('role')==="trainer"&&<th>Height</th>}		
+          {localStorage.getItem('role')==="trainer"&&<th>Weight</th>}
+          {localStorage.getItem('role')==="trainer"&&<th>Bmi</th>}
         </tr>
     {schedule.map((sche,index) => {   
         return(
         <tr>
         <td>{index+1}</td>
-        <td>{sche.student_id}</td>
-        <td>{sche.route==null?"Không có dữ liệu":sche.route}</td>		
-        {localStorage.getItem('role')==="trainer"&&<td>{sche.comment==null?"Không có dữ liệu":sche.comment}</td>}
+        <td>{sche.name}</td>
+        <td>{sche.height==null?"Chưa cập nhật":sche.height}</td>
+        <td>{sche.height==null?"Chưa cập nhật":sche.weight}</td>
+        <td>{sche.height==null?"Chưa cập nhật":sche.bmi}</td>
         {localStorage.getItem('role')!=="trainer"&&<td>
         
         

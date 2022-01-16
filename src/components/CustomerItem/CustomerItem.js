@@ -32,13 +32,15 @@ function CustomerItem(name) {
                 {items.map((item, index) =>
                     account.map((acc,i) =>
                     <div key ={index} classname="">
-                        {localStorage.setItem('IDS',item.id)}
+                        
                         {localStorage.setItem('role',"student")}
                         
                         
         <div to='/' className={clsx(styles.wrapper)}>
         {   name=='' &&  i == index  &&
-            <Link to={`detail/${item.id}`} className={clsx(styles.content)}>
+            <Link to={`detail/${item.id}`} className={clsx(styles.content)} onClick={()=>{localStorage.setItem('IDS',item.id);console.log("hello")}}>
+                
+                
                 <div className={clsx(styles.avatarField)}>
                     <div
                         style={{
@@ -86,7 +88,7 @@ function CustomerItem(name) {
             </Link>
 }
             {  i == index && name!='' && item.name.toLowerCase().includes(name.toLowerCase())  &&
-            <Link to={`detail/${item.id}`} className={clsx(styles.content)}>
+            <Link to={`detail/${item.id}`} className={clsx(styles.content)} onClick={()=>{localStorage.setItem('IDS',item.id);console.log("hello")}} >
                 <div className={clsx(styles.avatarField)}>
                     <div
                         style={{

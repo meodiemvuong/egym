@@ -105,9 +105,9 @@ function CustomerInfor(id) {
         //     ...userProfile,
         //     avatar: file.secure_url
         // }
-        setUserProfile(userProfile)
+        // setUserProfile(userProfile)
         
-        handleUpdate();
+        // handleUpdate();
     }
 
     return (

@@ -25,7 +25,7 @@ function ScheduleTrainer(id) {
         // var res = await addProfile.addService(mychoice);
     }
     
-    let url=`http://localhost:8080/cnpm/schedule-trainer/${id}`;  
+    let url=`http://localhost:8080/cnpm/period-trainer/${id}`;  
     useEffect(() => {
 
         fetch(url)
@@ -44,6 +44,7 @@ function ScheduleTrainer(id) {
                 }}).catch(e=>console.log(e))
         },[]);
     var arr = []
+    var na = []
     var t2=[], t3=[],t4=[],t5=[],t6=[], t7 =[], t8 =[]
     // console.log(schedule)
     var event ={"Thứ 2":[],
@@ -63,7 +64,7 @@ function ScheduleTrainer(id) {
                         date: sche.dayOfWeek,
                         endTime: new Date(`2018-02-23T${schedule[index].finish}`),
                         id: index+1,
-                        name: `${schedule[index].studentNames}`,
+                        name: (schedule[index].studentName),
                         startTime: new Date(`2018-02-23T${schedule[index].start}`),
                         type: 'error',
                         periodId: sche.periodId
@@ -138,10 +139,13 @@ function ScheduleTrainer(id) {
                                 fontSize: '15px'
                             }}
                         >
-                        {event.name}
                         
-                        {/* {console.log(event)} */}
-                        {/* { <button
+                        
+                        
+                        <div>
+                        { event.name.map((ev,index)=>{
+                            return(
+                            <button
                             style={{
                                 
                                 fontSize: '15px'
@@ -150,14 +154,20 @@ function ScheduleTrainer(id) {
                             onClick={()=>{
                             var cont = prompt(`Content mới`,'');
                             setContent(cont)
-                            setParams({...params,content:cont,periodId: event.periodId })
+                            setParams({...params,content:cont,periodId: event.periodId[index] })
                         if(content != null)  {
                             // console.log(params)
                             
                         } 
                         }}
-                        >{params.content==null?event.name:params.content}</button>}
-                         */}
+                        >
+                            {event.name[index]}
+                        </button>)
+                        })
+                        }
+
+                        </div>
+                        
                         </span>
                     </div>
                 );

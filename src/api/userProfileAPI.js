@@ -47,7 +47,7 @@ const userProfileAPI = {
             //console.log(response)
             if(response.data.error=='null'){
                 //console.log("Cap nhat thanh cong");
-                console.log(response)
+                // console.log(response)
             } else {
                 //console.log("Khong thanh cong");
             }

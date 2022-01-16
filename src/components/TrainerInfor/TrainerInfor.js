@@ -78,7 +78,7 @@ function TrainerInfor(id) {
 
     const handleUploadAvatar = async (e) => {
         // Upload lên Cloudinary
-
+        console.log("click vao day")
         const files = e.target.files;
         const data = new FormData();
         data.append('avatar', files[0]);
@@ -87,16 +87,9 @@ function TrainerInfor(id) {
             body: data
         })
         
-        // const file = await response.json();
-        // userProfile = {
-        //     ...userProfile,
-        //     avatar: file.secure_url
-        // }
 
-        // const response = await userProfileAPI.updateAvatar(data)
-
-        setUserProfile(userProfile)
-        handleUpdate();
+        // setUserProfile(userProfile)
+        // handleUpdate();
         //console.log(userProfile)
     }
 
