@@ -6,8 +6,7 @@ import { useParams } from 'react-router-dom'
 import styles from './EventDetail.module.css'
 import { Popup } from './../'
 import { useNavigate } from "react-router-dom";
-// Trang này ở trong trang admin
-// CustomerDetail sẽ gồm Header + CustomerInfor
+import AdminHeader from '../AdminHeader/AdminHeader';
 
 function EventDetail({ admin }) {
     const id = useParams();
@@ -36,6 +35,7 @@ function EventDetail({ admin }) {
 
     // sua su kien
     const handleUpdate = async () => {
+        setShowPopup(prev => !prev)
         console.log("click update")
         const response = await  getEvent.updateEvent(params)
         if(response && response.status) setShowPopup(prev => !prev);
@@ -73,6 +73,7 @@ function EventDetail({ admin }) {
     console.log(params)
     return (
         <div className="container_newfeed">
+        <AdminHeader heading="Danh sách học viên" />
         <div className="page_top"></div>
         <div className="newfeed">
             <div className="page-link">
@@ -304,7 +305,7 @@ function EventDetail({ admin }) {
                         </div>
                     
                 
-                        <Popup trigger={showPopup} message="Xoá thành công" />
+                        <Popup trigger={showPopup} message="Thay đổi thành công" />
         </div>
          <div className="page_bottom"></div>
     </div> 

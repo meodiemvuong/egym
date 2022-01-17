@@ -117,7 +117,7 @@ function Requirement(id, scheId, cate){
                                             let finish ;
                                             
                                             setStart(start)
-                                            if(start[0]==='0'){
+                                            if(start[0]==='0'&&start[1]!='9'){
                                                 setFinish(('0'+(parseInt(start[0])*10+parseInt(start[1])+1)+":00"))
                                                 finish =('0'+(parseInt(start[0])*10+parseInt(start[1])+1)+":00");
                                             }

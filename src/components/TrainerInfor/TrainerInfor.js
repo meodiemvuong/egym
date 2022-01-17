@@ -86,7 +86,9 @@ function TrainerInfor(id) {
             method: 'POST',
             body: data
         })
-        
+        if(response){
+            window.location.reload()
+        }
 
         // setUserProfile(userProfile)
         // handleUpdate();

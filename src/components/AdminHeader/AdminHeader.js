@@ -24,6 +24,8 @@ function AdminHeader({ heading }) {
                             className="admin-header-logout"
                             onClick={() => { 
                                 localStorage.removeItem('role')
+                                localStorage.removeItem('IDT');
+                                localStorage.removeItem('IDS')
                                 navigate('/');
                             }}
                         ><i class="fas fa-sign-out-alt"></i>

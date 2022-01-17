@@ -3,9 +3,7 @@ import clsx from 'clsx'
 import { AdminHeader,} from './../'
 import styles from './ReadReview.css'
 import { Link } from 'react-router-dom'
-
-
-
+import Review from '../../api/Review'
 function ReadReview({admin}) {
     const [items, setItems] = useState([])
     let url=`http://localhost:8080/cnpm/review-admin`;
@@ -18,6 +16,26 @@ function ReadReview({admin}) {
         .then (response =>response.json())
         .then (data => setItems(data.data))
     },[]);
+    const handleAccept = async(id)=>{
+        console.log("hello")
+        let res = await Review.Accept({
+            studentId: id,
+            action: true
+        })
+        if(res.data[0]){
+            console.log(res)
+            window.location.reload();
+        }
+    }
+    const handleDeny = async(id)=>{
+        let res = await Review.Accept({
+            studentId: id,
+            action: false
+        })
+        if(res.data[0]){
+            window.location.reload();
+        }
+    }
     return (
         <div className={clsx(styles.wrapper)}>
             
@@ -43,7 +61,6 @@ function ReadReview({admin}) {
                 </div>}
                 <div className="grid">
                     <div className="container">
-                    {admin && console.log("hello") }
                     <div className="container_newfeed">
         <div className="page_top"></div>
         <div className="newfeed">
@@ -63,7 +80,6 @@ function ReadReview({admin}) {
                 
                 items.map((item , index)=>{
                     return(
-                        
                         <div className="section">
                             <div className="image-wrapper">
                                 <img className="image_link" src={item.picture} alt="" onClick={()=>{
@@ -72,20 +88,12 @@ function ReadReview({admin}) {
                             </div>
                             {admin && <AdminHeader heading="Thông tin phản hồi" />}
                             <div className="info-wrapper">
-                            
                                 <div className="red-dot" style={{fontWeight:'bold'}}>Đánh giá của {item.name}</div>
                                 <div className="date">
                                     
                                     <h4>Ngày đánh giá: {(item.date.split('-').reverse()+"").replace(/,/g,'-')}</h4>
                                 </div>
                                 <div>
-                                {/* {
-                                <Link to={`/admin/events/detail/${item.id}`} >
-                                    <a className="title" href ={`/admin/events/detail/${item.id}`} title={item.title} >
-                                    <p >{item.title}</p>
-                                    
-                                </a>
-                                </Link>} */}
                                 {
                                 <div  >
                                     <a className="title"  title={item.title} >
@@ -96,14 +104,26 @@ function ReadReview({admin}) {
                                 </div>
                                 <a> {item.review} </a>
                             </div>
+                            {admin && 
+                            <div>
+                                <button
+                                onClick={()=>{
+                                    handleAccept(item.studentId);
+                                }}
+                                >Duyệt</button>
+                                <button
+                                onClick={()=>{
+                                    handleDeny(item.studentId);
+                                }}
+                                >Xoá</button>
+                            </div>
+                            }
                         </div>
                     )
                 
                 }
                 )
             }
-            
-            
         </div>
          <div className="page_bottom"></div>
     </div> 
