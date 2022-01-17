@@ -2,30 +2,24 @@ import './gridsystem.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import routes from './routes'
 import { ScrollToTop } from './components'
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import * as Actions from './store/actions'
-
-
+import Homepage from './pages/Homepage'
 function App() {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        let token = localStorage.getItem('token');
-        console.log("token: ", token);
-        dispatch(Actions.saveUserToRedux(token));
-    }, [])
-
-
     //Tạo các Route
     const showContentMenus = () => {
         let result = null;
         result = routes.map((route, index) => {
             return (
+                (route.path==='/' ||route.path==='/login' ||route.path==='/event' ||route.path==='/review')?
                 <Route
                     key={index}
                     path={route.path}
                     element={route.element}
-                />
+                />:<Route
+                key={index}
+                path={route.path}
+                element={localStorage.getItem('role')?route.element:<Homepage/>}
+                // element={route.element}
+            />
             )
         })
         return <Routes>{result}</Routes>;

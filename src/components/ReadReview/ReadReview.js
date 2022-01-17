@@ -42,19 +42,11 @@ function ReadReview({admin}) {
             
             <div className={clsx(styles.content)}>
                 {   
-                    
-                    
                     <div className="contentHeader">
-                        {/* <AdminHeader heading="Danh sách Sự kiện" />
-                    <div className="heading">Danh sách Đánh giá</div> */}
                     <div className="option">
-                        <Link to='/' className="optionBtn">
-                            <i class={clsx(styles.optionIcon, "fas fa-search")}></i>
-                            Tìm kiếm
-                        </Link>
+                    {admin && <AdminHeader heading="Thông tin phản hồi" />}
                         <Link to='/review/add' className="optionBtn">
                             <i className={clsx(styles.optionIcon, "fas", "fa-file-plus")}></i>
-                            
                             Thêm
                         </Link>
                     </div>
@@ -86,7 +78,6 @@ function ReadReview({admin}) {
                                     window.open('#');
                                 }}/>      
                             </div>
-                            {admin && <AdminHeader heading="Thông tin phản hồi" />}
                             <div className="info-wrapper">
                                 <div className="red-dot" style={{fontWeight:'bold'}}>Đánh giá của {item.name}</div>
                                 <div className="date">
